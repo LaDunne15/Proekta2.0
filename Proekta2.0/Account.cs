@@ -8,11 +8,11 @@ namespace Proekta2._0
 {
     class Account
     {
-        public string Name;//Нік співробітника
-        public string Login;//Логін співробітника
-        public string password;//пароль співробітника
-        public int count_selled=0;//кількість проданих книг
-        public bool isAdmin;//чи є адміністратор
+        public string Name { get; set; } //Нік співробітника
+        public string Login { get; set; } //Логін співробітника
+        public string password { get; set; } //пароль співробітника
+        public int count_selled {get;set;} //кількість проданих книг
+    public bool isAdmin { get; set; } //чи є адміністратор
         public Account(string Nic, string Log, string pass,int count,bool isadmin)
         {
             Name = Nic;

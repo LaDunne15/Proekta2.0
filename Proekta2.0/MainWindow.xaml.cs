@@ -21,6 +21,7 @@ namespace Proekta2._0
     /// </summary>
     public partial class MainWindow : Window
     {
+        int index=0;
         ListAcc lists = new ListAcc();
         Account seller;
         int a = 0;
@@ -105,7 +106,7 @@ namespace Proekta2._0
         }
         void ff()
         {
-            
+
         }
         private void addbook(object sender, RoutedEventArgs e)
         {
@@ -129,7 +130,7 @@ namespace Proekta2._0
             tb2.FontFamily = new FontFamily("Jura");
             tb2.Text = "Автор";//автор
             tb2.Foreground = Brushes.White;
-            tb2.Margin = new Thickness(9,249,9,6);
+            tb2.Margin = new Thickness(9, 249, 9, 6);
             grid.Children.Add(tb2);
 
             TextBlock tb3 = new TextBlock();
@@ -144,10 +145,10 @@ namespace Proekta2._0
             Image image = new Image();
             image.HorizontalAlignment = HorizontalAlignment.Left;
             image.Height = 167;
-            image.Margin = new Thickness(21, 0 ,0,0);
+            image.Margin = new Thickness(21, 0, 0, 0);
             image.VerticalAlignment = VerticalAlignment.Top;
             image.Width = 169;
-            image.Source = new BitmapImage(new Uri(@"std_book.png",UriKind.Relative));
+            image.Source = new BitmapImage(new Uri(@"std_book.png", UriKind.Relative));
             grid.Children.Add(image);
 
             Button b = new Button();
@@ -201,14 +202,14 @@ namespace Proekta2._0
         private void Log_in(object sender, RoutedEventArgs e)
         {
             int user_index = lists.SearchAcc(Log.Text, Pass.Password);
-            if(user_index!=(-1))
+            if (user_index != (-1))
             {
                 Reg.Visibility = Visibility.Hidden;
                 Log.Text = "";
                 Pass.Password = "";
                 seller = lists.GetAccountByID(user_index);
                 seller_name.Text = seller.Name;
-                if(seller.isAdmin)
+                if (seller.isAdmin)
                 {
                     ManageBooks.Height = 45;
                     DeleteAcc.Visibility = Visibility.Hidden;
@@ -228,7 +229,7 @@ namespace Proekta2._0
         private void newAccount(object sender, RoutedEventArgs e)
         {
 
-            if(newPass1.Password==newPass2.Password)
+            if (newPass1.Password == newPass2.Password)
             {
                 if (lists.SearchAcc(newLogin.Text) == -1)
                 {
@@ -259,11 +260,12 @@ namespace Proekta2._0
         {
             if (
             Change_Acc.Visibility == Visibility.Hidden)
-            { Change_Acc.Visibility = Visibility.Visible;
+            {
+                Change_Acc.Visibility = Visibility.Visible;
                 _Name.Text = seller.Name;
                 Login.Text = seller.Login;
                 Password.Text = seller.password;
-                Count.Text = seller.count_selled+"";
+                Count.Text = seller.count_selled + "";
             }
             else
                 Change_Acc.Visibility = Visibility.Hidden;
@@ -289,22 +291,22 @@ namespace Proekta2._0
         private void deleteAcc(object sender, RoutedEventArgs e)
         {
             Random r = new Random();
-            int x1=r.Next() % 50;
+            int x1 = r.Next() % 50;
             int x2 = r.Next() % 50;
             int sum;
             int x3 = r.Next() % 2;
-            if(x3==1)
+            if (x3 == 1)
             {
                 sum = x1 + x2;
             }
             else
             {
-                sum = r.Next() % 99+1;
+                sum = r.Next() % 99 + 1;
             }
             MessageBoxResult messageBoxResult1 = MessageBox.Show("Хочете видалити свій акаунт? Знайте, що потім ваші дані повернути бути неможливо", "Видалити аккаунт", MessageBoxButton.YesNo);
             if (messageBoxResult1 == MessageBoxResult.Yes)
             {
-                MessageBoxResult messageBoxResult2 = MessageBox.Show("Контрольне питання: "+x1+"+"+x2+"="+sum+"?", "Видалити аккаунт", MessageBoxButton.YesNo);
+                MessageBoxResult messageBoxResult2 = MessageBox.Show("Контрольне питання: " + x1 + "+" + x2 + "=" + sum + "?", "Видалити аккаунт", MessageBoxButton.YesNo);
                 if (messageBoxResult2 == MessageBoxResult.Yes)
                 {
                     if (x3 == 1)
@@ -315,9 +317,9 @@ namespace Proekta2._0
                         Reg.Visibility = Visibility.Visible;
 
                     }
-                else if (x3 == 0 && x1 + x2 != sum)
-                    MessageBox.Show("Перевірка не пройдена! Задумайтесь!");
-                    
+                    else if (x3 == 0 && x1 + x2 != sum)
+                        MessageBox.Show("Перевірка не пройдена! Задумайтесь!");
+
                 }
             }
         }
@@ -328,9 +330,32 @@ namespace Proekta2._0
             Change_Team.Visibility == Visibility.Hidden)
             {
                 Change_Team.Visibility = Visibility.Visible;
+                dataTeam.ItemsSource = null;
+                dataTeam.ItemsSource = lists.getList();
             }
             else
                 Change_Team.Visibility = Visibility.Hidden;
+        }
+
+        private void datagr_select(object sender, EventArgs e)
+        {
+            int index = dataTeam.SelectedIndex;
+        }
+        private void Delete_Acc(object sender, EventArgs e)
+        {
+            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити продавця " + lists.GetAccountByID(index).Name.Replace(" ","") + " під логіном "+lists.GetAccountByID(index).Login.Replace(" ", "") + ", що продав " + lists.GetAccountByID(index).count_selled + " книг", "Видалити аккаунт", MessageBoxButton.YesNo);
+            if (messageBoxResult2 == MessageBoxResult.Yes)
+            {
+                if (lists.GetAccountByID(index).Login != seller.Login)
+                { lists.DellAcc(lists.GetAccountByID(index));
+                    MessageBox.Show("Продавця видалено успішно");
+                    lists = new ListAcc();
+                    dataTeam.ItemsSource = null;
+                    dataTeam.ItemsSource = lists.getList();
+                }
+            else
+                MessageBox.Show("Адміністратора видалити неможливо!");
+            }
         }
     }
 }

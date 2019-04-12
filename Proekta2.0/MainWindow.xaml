@@ -120,16 +120,16 @@
                 <materialDesign:PackIcon Kind="ArrowLeftBold" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="4.75,1.2"/>
             </Button>
         </Grid>
-        <Grid x:Name="Basket" HorizontalAlignment="Right" Margin="0,50,0,0" Background="White" Width="0">
+        <Grid x:Name="Basket" HorizontalAlignment="Right" Margin="0,50,0,0" Background="White" Width="500">
             <ScrollViewer>
                 <StackPanel x:Name="list_b">
-                    <Grid Height="75" Background="#FFF9F9F9">
-                        <TextBlock FontFamily="Jura" Text="Книга" FontSize="18" Height="50" Width="280" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
-                        <TextBlock FontFamily="Jura" Text="Автор" FontSize="18" Height="25" Width="332" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                        <TextBlock FontFamily="Jura" Text="50₴" FontSize="28" Height="50" Width="93" VerticalAlignment="Top" HorizontalAlignment="Right" TextAlignment="Center" />
-                        <Button Height="25" Width="50" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Grid Height="92" Background="#FFF9F9F9" Margin="5,5,5,5">
+                        <TextBlock FontFamily="Jura" Text="Книга" FontSize="18" Height="82" VerticalAlignment="Top" TextWrapping="Wrap" Margin="123,6,130,0"/>
+                        <TextBlock FontFamily="Jura" Text="50₴" FontSize="28" Height="50" Width="93" TextAlignment="Center" Margin="384,6,6,36" />
+                        <Button Height="Auto" Margin="421,56,7,6">
                             <materialDesign:PackIcon Kind="Trash"/>
                         </Button>
+                        <Image HorizontalAlignment="Left" Height="92" Margin="13,0,0,0" VerticalAlignment="Top" Width="100" Source="std_book.png"/>
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
@@ -184,12 +184,16 @@
                 <materialDesign:PackIcon Kind="Trash" Foreground="Black"/>
             </Button>
         </Grid>
-        <Grid x:Name="Change_Team" Height="600" Width="1080" Background="DarkRed" Visibility="Visible">
+        <Grid x:Name="Change_Team" Height="600" Width="1080" Background="DarkRed" Visibility="Hidden">
             <Button x:Name="Close" HorizontalAlignment="Left" Margin="977,12,0,0" VerticalAlignment="Top" Width="68" Height="62" Background="{x:Null}" BorderBrush="{x:Null}" Click="OpenTeam">
                 <materialDesign:PackIcon Kind="Close" Foreground="White" Height="25" Width="25"/>
             </Button>
-            <DataGrid HorizontalAlignment="Left" Height="416" Margin="25,52,0,0" VerticalAlignment="Top" Width="590"/>
-            <TextBlock HorizontalAlignment="Left" Margin="63,18,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" FontFamily="Jura"/>
+            <DataGrid x:Name="dataTeam" HorizontalAlignment="Left" Height="504" Margin="127,52,0,0" VerticalAlignment="Top" Width="820" AutoGenerateColumns="True" MouseLeftButtonUp="datagr_select" IsReadOnly="True">
+            </DataGrid>
+            <TextBlock HorizontalAlignment="Left" Margin="137,18,0,0" TextWrapping="Wrap" Text="Наші працівники:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="24"/>
+            <Button HorizontalAlignment="Left" Margin="27,476,0,0" VerticalAlignment="Top" Width="70" Height="72" Click="Delete_Acc">
+                <materialDesign:PackIcon Kind="Trashcan"/>
+            </Button>
         </Grid>
     </Grid>
 </Window>

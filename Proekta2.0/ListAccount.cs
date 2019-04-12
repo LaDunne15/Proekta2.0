@@ -17,6 +17,10 @@ namespace Proekta2._0
             foreach (Account i in f)
                 l.Add(i);
         }
+        public List<Account> getList()
+        {
+            return l;
+        }
         public ListAcc()
         {
             string c = "SELECT * FROM Accounts";
