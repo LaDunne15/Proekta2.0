@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Proekta2._0.ItemBook"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Proekta2._0"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Height="300" Width="320">
+    <Grid Background="#4CCD5656" Margin="5,5,0,10">
+        <TextBlock Text="Книга" FontFamily="Jura" Foreground="White" FontSize="18" TextWrapping="Wrap" Margin="8,177,13,38" />
+        <TextBlock Text="Автор" FontFamily="Jura" Foreground="White" Margin="9,249,9,8" />
+        <TextBlock Text="50₴" FontFamily="Jura" Foreground="White" Margin="166,129,1,104" TextAlignment="Center" FontSize="36" />
+        <Image HorizontalAlignment="Left" Height="167" Margin="21,0,0,0" VerticalAlignment="Top" Width="169" Source="std_book.png"/>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}"  Click="Button_Click" Height="300" Width="320">
+        </Button>
+        <Button Background="{x:Null}" Margin="241,4,5,254" BorderBrush="{x:Null}" Height="Auto" Click="Button_Click_1">
+            <materialDesign:PackIcon Kind="About"  Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        </Button>
+    </Grid>
+</UserControl>
