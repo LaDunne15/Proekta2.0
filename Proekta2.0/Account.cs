@@ -12,7 +12,7 @@ namespace Proekta2._0
         public string Login { get; set; } //Логін співробітника
         public string password { get; set; } //пароль співробітника
         public int count_selled {get;set;} //кількість проданих книг
-    public bool isAdmin { get; set; } //чи є адміністратор
+        public bool isAdmin { get; set; } //чи є адміністратор
         public Account(string Nic, string Log, string pass,int count,bool isadmin)
         {
             Name = Nic;

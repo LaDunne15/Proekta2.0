@@ -88,6 +88,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BaseOfBooks.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Book.xaml.cs">
       <DependentUpon>Book.xaml</DependentUpon>
@@ -143,6 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="darkredbackfround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\10470285_0.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

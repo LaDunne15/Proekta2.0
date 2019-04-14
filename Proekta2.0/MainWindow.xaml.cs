@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Proekta2._0
 {
@@ -21,19 +22,51 @@ namespace Proekta2._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        int index=0;
+        int index = 0;
+        int indexbook = 0;
         ListAcc lists = new ListAcc();
+        BaseOfBooks bob = new BaseOfBooks();
+        List<Book> oneGenrebooks;
+        List<Book> basket;
         Account seller;
-        int a = 0;
+        string _path;
         public MainWindow()
         {
             InitializeComponent();
         }
+        public string GenreFromIndex(int a)
+        {
+            switch (a)
+            {
+                case 1: return "Бізнес і інвестиції";
+                case 2: return "Біографії і мемуари";
+                case 3: return "Детективи і триллери";
+                case 4: return "Для дітей";
+                case 5: return "Здоров'я і спорт";
+                case 6: return "Історія";
+                case 7: return "Комп'ютери і технології";
+                case 8: return "Кулінарія і домашнє господарство";
+                case 9: return "Романи";
+                case 10: return "Фантастика і фентезі";
+                case 11: return "Художня література";
+                default: return "Невідомий жанр";
+            }
+        }
+        private void CloseMenu(object sender, RoutedEventArgs e)
+        {
+            if (Menuu.Width == 250)
+            {
+                DoubleAnimation buttonAnimation = new DoubleAnimation();
+                buttonAnimation.From = 250;
+                buttonAnimation.To = 0;
+                buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
+            }
+        }
 
         private void Menu(object sender, RoutedEventArgs e)
         {
-            a = (a + 1) % 2;
-            if (a == 0)
+            if (Menuu.Width == 250)
             {
                 DoubleAnimation buttonAnimation = new DoubleAnimation();
                 buttonAnimation.From = 250;
@@ -53,10 +86,10 @@ namespace Proekta2._0
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Basket.Width == 400)
+            if (Basket.Width == 500)
             {
                 DoubleAnimation buttonAnimation = new DoubleAnimation();
-                buttonAnimation.From = 400;
+                buttonAnimation.From = 500;
                 buttonAnimation.To = 0;
                 buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
                 Basket.BeginAnimation(Button.WidthProperty, buttonAnimation);
@@ -65,7 +98,7 @@ namespace Proekta2._0
             {
                 DoubleAnimation buttonAnimation = new DoubleAnimation();
                 buttonAnimation.From = 0;
-                buttonAnimation.To = 400;
+                buttonAnimation.To = 500;
                 buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
                 Basket.BeginAnimation(Button.WidthProperty, buttonAnimation);
             }
@@ -74,6 +107,14 @@ namespace Proekta2._0
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Reg.Visibility = Visibility.Visible;
+            if (Menuu.Width == 250)
+            {
+                DoubleAnimation buttonAnimation = new DoubleAnimation();
+                buttonAnimation.From = 250;
+                buttonAnimation.To = 0;
+                buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
+            }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -110,6 +151,14 @@ namespace Proekta2._0
         }
         private void addbook(object sender, RoutedEventArgs e)
         {
+            books.Children.Clear();
+            foreach (var i in bob.getList())
+            {
+                addbooktobass(i);
+            }
+        }
+        private void addbooktobass(Book A)
+        {
             Grid grid = new Grid();
             var bc = new BrushConverter();
             grid.Background = (Brush)bc.ConvertFrom("#4CCD5656");
@@ -119,7 +168,7 @@ namespace Proekta2._0
 
             TextBlock tb = new TextBlock();
             tb.FontFamily = new FontFamily("Jura");
-            tb.Text = "Книга";//Назва книги
+            tb.Text = A.Name;//Назва книги
             tb.Foreground = Brushes.White;
             tb.FontSize = 18;
             tb.TextWrapping = TextWrapping.Wrap;
@@ -128,13 +177,13 @@ namespace Proekta2._0
 
             TextBlock tb2 = new TextBlock();
             tb2.FontFamily = new FontFamily("Jura");
-            tb2.Text = "Автор";//автор
+            tb2.Text = A.Author;//автор
             tb2.Foreground = Brushes.White;
             tb2.Margin = new Thickness(9, 249, 9, 6);
             grid.Children.Add(tb2);
 
             TextBlock tb3 = new TextBlock();
-            tb3.Text = "50₴";
+            tb3.Text = A.price + "₴";
             tb3.FontFamily = new FontFamily("Jura");
             tb3.Foreground = Brushes.White;
             tb3.Margin = new Thickness(166, 129, 1, 104);
@@ -148,8 +197,17 @@ namespace Proekta2._0
             image.Margin = new Thickness(21, 0, 0, 0);
             image.VerticalAlignment = VerticalAlignment.Top;
             image.Width = 169;
-            image.Source = new BitmapImage(new Uri(@"std_book.png", UriKind.Relative));
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory().ToString());
+            bitmap.UriSource = new Uri(di.Parent.Parent.FullName + @"\images\" + A.ImagePath);
+            bitmap.EndInit();
+
+            image.Source = bitmap;
+
             grid.Children.Add(image);
+
 
             Button b = new Button();
             b.Name = "i" + books.Children.Count;
@@ -189,8 +247,35 @@ namespace Proekta2._0
         }
         private void bookinfo(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(books.Children.Count + "");
+            BookInfo.Visibility = Visibility.Visible;
+            int i=Convert.ToInt32(((Button)sender).Name.Replace("j",""));
+            Book ibook = oneGenrebooks.ElementAt(i);
+            IB_About.Text = ibook.About;
+            IB_name.Text = ibook.Name;
+            IB_Author.Text = ibook.Author;
 
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory().ToString());
+            bitmap.UriSource = new Uri(di.Parent.Parent.FullName + @"\images\" + ibook.ImagePath);
+            bitmap.EndInit();
+
+            IB_Image.Source = bitmap;
+            IB_Count.Text = ibook.Count_Selled+"";
+            IB_Genre.Text = GenreFromIndex(ibook.Genre);
+
+            if(ibook.discount==1)
+            {
+                IB_Price1.Text = "";
+                IB_Price2.Text = ibook.price+ "₴";
+            }
+            else
+            {
+                IB_Price1.Text = ibook.price + "₴";
+                IB_Price1.TextDecorations = TextDecorations.Strikethrough;
+                IB_Price2.Text = (ibook.price * ibook.discount)+ "₴";
+            }
         }
         private void addtoBasket(object sender, RoutedEventArgs e)
         {
@@ -269,7 +354,14 @@ namespace Proekta2._0
             }
             else
                 Change_Acc.Visibility = Visibility.Hidden;
-
+            if (Menuu.Width == 250)
+            {
+                DoubleAnimation buttonAnimation = new DoubleAnimation();
+                buttonAnimation.From = 250;
+                buttonAnimation.To = 0;
+                buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
+            }
         }
 
         private void chLogin(object sender, RoutedEventArgs e)
@@ -326,6 +418,14 @@ namespace Proekta2._0
 
         private void OpenTeam(object sender, RoutedEventArgs e)
         {
+            if (Menuu.Width == 250)
+            {
+                DoubleAnimation buttonAnimation = new DoubleAnimation();
+                buttonAnimation.From = 250;
+                buttonAnimation.To = 0;
+                buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
+            }
             if (
             Change_Team.Visibility == Visibility.Hidden)
             {
@@ -343,19 +443,145 @@ namespace Proekta2._0
         }
         private void Delete_Acc(object sender, EventArgs e)
         {
-            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити продавця " + lists.GetAccountByID(index).Name.Replace(" ","") + " під логіном "+lists.GetAccountByID(index).Login.Replace(" ", "") + ", що продав " + lists.GetAccountByID(index).count_selled + " книг", "Видалити аккаунт", MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити продавця " + lists.GetAccountByID(index).Name.Replace(" ", "") + " під логіном " + lists.GetAccountByID(index).Login.Replace(" ", "") + ", що продав " + lists.GetAccountByID(index).count_selled + " книг", "Видалити аккаунт", MessageBoxButton.YesNo);
             if (messageBoxResult2 == MessageBoxResult.Yes)
             {
                 if (lists.GetAccountByID(index).Login != seller.Login)
-                { lists.DellAcc(lists.GetAccountByID(index));
+                {
+                    lists.DellAcc(lists.GetAccountByID(index));
                     MessageBox.Show("Продавця видалено успішно");
                     lists = new ListAcc();
                     dataTeam.ItemsSource = null;
                     dataTeam.ItemsSource = lists.getList();
                 }
-            else
-                MessageBox.Show("Адміністратора видалити неможливо!");
+                else
+                    MessageBox.Show("Адміністратора видалити неможливо!");
             }
+        }
+
+        private void GetGenre(object sender, RoutedEventArgs e)
+        {
+            books.Children.Clear();
+            int g = Convert.ToInt32(((Button)sender).Name.Replace("G", ""));
+            oneGenrebooks = bob.OneTypeBooks(g);
+            foreach (var i in oneGenrebooks)
+            {
+                addbooktobass(i);
+            }
+            if (Menuu.Width == 250)
+            {
+                DoubleAnimation buttonAnimation = new DoubleAnimation();
+                buttonAnimation.From = 250;
+                buttonAnimation.To = 0;
+                buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
+            }
+        }
+
+        private void ManageBook(object sender, RoutedEventArgs e)
+        {
+            if (Menuu.Width == 250)
+            {
+                DoubleAnimation buttonAnimation = new DoubleAnimation();
+                buttonAnimation.From = 250;
+                buttonAnimation.To = 0;
+                buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
+            }
+        }
+        private void Ch_Lib(object sender, RoutedEventArgs e)
+        {
+            if (Menuu.Width == 250)
+            {
+                DoubleAnimation buttonAnimation = new DoubleAnimation();
+                buttonAnimation.From = 250;
+                buttonAnimation.To = 0;
+                buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
+            }
+            if (Change_Library.Visibility == Visibility.Hidden)
+            {
+                Change_Library.Visibility = Visibility.Visible;
+                data2.ItemsSource = null;
+                data2.ItemsSource = bob.getList();
+            }
+            else
+                Change_Library.Visibility = Visibility.Hidden;
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Filter = "(*.jpg)|*.jpg|(*.png)|*.png|All files (*.*)|*.*";
+            dialog.FilterIndex = 2;
+            Nullable<bool> result = dialog.ShowDialog();
+            if (result == true)
+            {
+                _path = dialog.FileName;
+                string[] a=_path.Split('.');
+                BookPath.Text = System.IO.Path.GetFileNameWithoutExtension(_path)+"."+a[a.Length-1];
+            }
+        }
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory().ToString());
+            string a =  di.Parent.Parent.FullName + @"\images\" + BookPath.Text;
+            int i = 0;
+            if (BookName.Text == "")
+            { MessageBox.Show("Дайте назву книзі!"); i++; }
+            if (BookAuthor.Text == "")
+            { MessageBox.Show("Дайте автору книзі!"); i++; }
+            if (BookPrice.Text == "")
+            { MessageBox.Show("Дайте ціну книзі!"); i++; }
+            if (BookGenre.SelectedIndex == -1)
+            { MessageBox.Show("Виберіть потрібний жанр!"); i++; }
+            if (BookPath.Text == "")
+            { MessageBox.Show("Вкажіть шлях до картинки!"); i++; }
+            if (i != 0)
+            {
+                MessageBox.Show("Всі потрібні поля не заповненні!Книгу не додано!");
+            }
+            else
+            {
+                MessageBox.Show("Книгу додано успішно!");
+                bob.AddBook(new Book(BookName.Text, BookAuthor.Text, Convert.ToDouble(BookPrice.Text),BookAbout.Text,BookGenre.SelectedIndex+1,1,BookPath.Text,0));
+                File.Copy(_path, a);
+                BookAbout.Text = "";
+                BookAuthor.Text = "";
+                BookGenre.SelectedIndex = -1;
+                BookName.Text = "";
+                BookPath.Text = "";
+                BookPrice.Text = "";
+            }
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            Book aa = bob.GetBookByID(indexbook);
+            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити книгу '" + aa.Name.Replace(" ","") + "' - " +aa.Author.Replace(" ","")  , "Видалити аккаунт", MessageBoxButton.YesNo);
+            if (messageBoxResult2 == MessageBoxResult.Yes)
+            {
+                    bob.DellAcc(aa);
+                    MessageBox.Show("Книгу видалено успішно");
+                    lists = new ListAcc();
+                    dataTeam.ItemsSource = null;
+                    dataTeam.ItemsSource = lists.getList();
+            }
+        }
+
+        private void Data2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            indexbook = data2.SelectedIndex;
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            BookInfo.Visibility = Visibility.Hidden;
         }
     }
 }
