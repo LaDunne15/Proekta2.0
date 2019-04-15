@@ -36,7 +36,7 @@ namespace Proekta2._0
                         string x1 = DD.GetValue(0).ToString();
                         string x2 = DD.GetValue(1).ToString();
                         double x3 = Convert.ToDouble(DD.GetValue(2));
-                        string x4 = DD.GetValue(3).ToString().Replace(" ","");
+                        string x4 = DD.GetValue(3).ToString();
                         int x5 = Convert.ToInt32(DD.GetValue(4));
                         double x6 = Convert.ToDouble(DD.GetValue(5));
                         string x7 = DD.GetValue(6).ToString();

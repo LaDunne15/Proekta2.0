@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SystemDiscount.cs" />
     <Page Include="Book.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

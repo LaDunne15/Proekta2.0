@@ -132,7 +132,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="Reg" Visibility="Hidden" Background="#FF440A0A">
+        <Grid x:Name="Reg" Visibility="Visible" Background="#FF440A0A">
             <Rectangle Fill="White" Margin="300,25,300,50"></Rectangle>
             <TextBox x:Name="Log" HorizontalAlignment="Left" Height="30" Margin="450,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
             <PasswordBox x:Name="Pass" HorizontalAlignment="Left" Height="30" Margin="450,300,0,0" VerticalAlignment="Top" Width="200" PasswordChar="*"/>
@@ -217,7 +217,7 @@
                 <ComboBoxItem Content="Фантастика і фентезі"></ComboBoxItem>
                 <ComboBoxItem Content="Художня література"></ComboBoxItem>
             </ComboBox>
-            <TextBox x:Name="BookPrice" HorizontalAlignment="Left" Height="47" Margin="390,505,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" BorderBrush="#89FFFFFF" Foreground="White" FontSize="36" FontFamily="Jura"/>
+            <TextBox x:Name="BookPrice" HorizontalAlignment="Left" Height="47" Margin="390,503,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" BorderBrush="#89FFFFFF" Foreground="White" FontSize="36" FontFamily="Jura"/>
             <TextBlock HorizontalAlignment="Left" Margin="326,436,0,0" TextWrapping="Wrap" Text="Жанр:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <TextBlock HorizontalAlignment="Left" Margin="404,476,0,0" TextWrapping="Wrap" Text="Ціна:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <Button Content="Завантажити фото" HorizontalAlignment="Left" Margin="594,358,0,0" VerticalAlignment="Top" Width="155" Click="Button_Click_5"/>
@@ -225,6 +225,9 @@
             <Button Content="Додати нову книгу" HorizontalAlignment="Left" Margin="591,464,0,0" VerticalAlignment="Top" Width="163" Height="84" Click="Button_Click_6"/>
             <Button Margin="998,276,12,231" Height="Auto" Click="Button_Click_7">
                 <materialDesign:PackIcon Kind="Trash" Foreground="White" Height="20" Width="20"/>
+            </Button>
+            <Button Margin="998,204,12,303" Height="Auto" Click="Button_Click_10">
+                <materialDesign:PackIcon Kind="Discount" Foreground="White" Height="20" Width="20"/>
             </Button>
         </Grid>
         <Grid  Background="#BF000000" x:Name="BookInfo" Visibility="Hidden">
@@ -241,8 +244,48 @@
             <TextBlock x:Name="IB_Price2" Text="Ціна зі знижкою" HorizontalAlignment="Left" Margin="140,380,0,0" VerticalAlignment="Top" Height="122" Width="228" FontFamily="Jura" FontSize="40" TextWrapping="Wrap" TextAlignment="Center"/>
             <TextBlock x:Name="IB_Count" Text="(Кількість проданих)" Margin="450,294,0,0" VerticalAlignment="Top" Height="36" Width="292" FontFamily="Jura" FontSize="20" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Right"/>
             <TextBlock Text="Всього продано" HorizontalAlignment="Left" Margin="626,266,0,0" VerticalAlignment="Top" Height="26" Width="118" FontFamily="Jura" FontSize="14" TextWrapping="Wrap"/>
-            <TextBlock Text="раз" HorizontalAlignment="Left" Margin="764,292,0,0" VerticalAlignment="Top" Height="26" Width="52" FontFamily="Jura" FontSize="20" TextWrapping="Wrap"/>
+            <TextBlock Text="екземплярів" HorizontalAlignment="Left" Margin="764,292,0,0" VerticalAlignment="Top" Height="26" Width="152" FontFamily="Jura" FontSize="20" TextWrapping="Wrap"/>
             <TextBlock x:Name="IB_Price1" Text="Ціна" HorizontalAlignment="Left" Margin="140,324,0,0" VerticalAlignment="Top" Height="50" Width="210" FontFamily="Jura" FontSize="32" TextWrapping="Wrap" TextAlignment="Center"/>
+        </Grid>
+        <Grid Background="DarkRed" Margin="515,0,15,0" x:Name="Discount_System" Visibility="Hidden">
+            <TextBlock HorizontalAlignment="Left" Margin="60,16,0,0" TextWrapping="Wrap" Text="Керування знижками:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
+            <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="124" Margin="29,39,0,0" VerticalAlignment="Top" Width="431">
+
+            </Border>
+            <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="145" Margin="29,168,0,0" VerticalAlignment="Top" Width="431"/>
+
+            <Button Content="Очистити поля" Height="Auto" Margin="50,117,336,413" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,44,0,0" TextWrapping="Wrap" Text="- дати знижку всім книгам визначеного автора;" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
+            <Button Content="Дати знижку" Height="Auto" Margin="228,117,102,413" Background="#FFBF5C23" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount1"/>
+            <Button HorizontalAlignment="Left" Margin="467,10,0,0" VerticalAlignment="Top" Width="53" Height="50" BorderBrush="White" Background="{x:Null}" Click="Button_Click_9">
+                <materialDesign:PackIcon Kind="Close"/>
+            </Button>
+            <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="145" Margin="29,168,0,0" VerticalAlignment="Top" Width="431"/>
+            <Button Content="Очистити поля" Height="Auto" Margin="50,268,336,264" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,173,0,0" TextWrapping="Wrap" Text="- дати знижку визначеній книзі;" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
+            <TextBlock HorizontalAlignment="Left" Margin="46,201,0,0" TextWrapping="Wrap" Text="Назва:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="98" Height="22"/>
+            <TextBox x:Name="DisName2" HorizontalAlignment="Left" Height="30" Margin="102,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF"/>
+            <TextBlock HorizontalAlignment="Left" Margin="41,231,0,0" TextWrapping="Wrap" Text="Ім'я автора:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="93" Height="23"/>
+            <TextBox x:Name="DisNameA2" HorizontalAlignment="Left" Height="30" Margin="137,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF"/>
+            <Button Content="Дати знижку" Height="Auto" Margin="228,268,102,264" Background="#FFBF5C23" BorderBrush="#FFBF5C23" FontFamily="Jura"/>
+            <TextBlock HorizontalAlignment="Left" Margin="354,178,0,0" TextWrapping="Wrap" Text="Знижка:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="98" Height="22"/>
+            <TextBox x:Name="DisDis2" HorizontalAlignment="Left" Height="30" Margin="343,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="94" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF"/>
+            <TextBlock HorizontalAlignment="Left" Margin="46,78,0,0" TextWrapping="Wrap" Text="Ім'я автора:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="98" Height="22"/>
+            <TextBox x:Name="DisNameA1" HorizontalAlignment="Left" Height="30" Margin="141,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF"/>
+            <TextBlock HorizontalAlignment="Left" Margin="354,60,0,0" TextWrapping="Wrap" Text="Знижка:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="98" Height="22"/>
+            <TextBox x:Name="DisDis1" HorizontalAlignment="Left" Height="30" Margin="343,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="94" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF"/>
+            <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="119" Margin="29,322,0,0" VerticalAlignment="Top" Width="431"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,327,0,0" TextWrapping="Wrap" Text="- знижка по промокоду (10%, діє 2 тижні);" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
+            <Button Content="Дати знижку" Height="Auto" Margin="225,392,105,140" Background="#FFBF5C23" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount3"/>
+            <Button Content="Очистити поля" Height="Auto" Margin="50,268,336,264" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,173,0,0" TextWrapping="Wrap" Text="- дати знижку визначеній книзі;" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
+            <Button Content="Дати знижку" Height="Auto" Margin="228,268,102,264" Background="#FFBF5C23" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="71,353,0,0" TextWrapping="Wrap" Text="Промокод:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="93" Height="23"/>
+            <TextBox x:Name="Promocode" HorizontalAlignment="Left" Height="30" Margin="167,347,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF"/>
+            <Button Content="Очистити поле" Height="Auto" Margin="50,392,336,140" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura"/>
+            <TextBlock HorizontalAlignment="Left" Margin="42,484,0,0" TextWrapping="Wrap" Text="- скасувати всі знижки;" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
+            <Button Content="Скасувати" Height="Auto" Margin="35,517,295,15" Background="Black" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount4"/>
+
         </Grid>
     </Grid>
 </Window>

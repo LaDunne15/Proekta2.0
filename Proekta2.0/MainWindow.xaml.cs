@@ -30,6 +30,7 @@ namespace Proekta2._0
         List<Book> basket;
         Account seller;
         string _path;
+        Discount discount;
         public MainWindow()
         {
             InitializeComponent();
@@ -183,7 +184,7 @@ namespace Proekta2._0
             grid.Children.Add(tb2);
 
             TextBlock tb3 = new TextBlock();
-            tb3.Text = A.price + "₴";
+            tb3.Text = (A.price*A.discount )+ "₴";
             tb3.FontFamily = new FontFamily("Jura");
             tb3.Foreground = Brushes.White;
             tb3.Margin = new Thickness(166, 129, 1, 104);
@@ -582,6 +583,47 @@ namespace Proekta2._0
         private void Button_Click_8(object sender, RoutedEventArgs e)
         {
             BookInfo.Visibility = Visibility.Hidden;
+        }
+        private void discount1(object sender, RoutedEventArgs e)
+        {
+            discount = new Discount(new DiscountByAuthor());
+            discount.ExecuteDiscount("",DisNameA1.Text, (100-Convert.ToDouble(DisDis1.Text))/100);
+            MessageBox.Show("Знижку "+DisDis1.Text+"% на всі книги "+DisNameA1.Text+" надано!");
+            bob = new BaseOfBooks();
+            DisNameA1.Text = "";
+            DisDis1.Text = "";
+        }
+        private void discount2(object sender, RoutedEventArgs e)
+        {
+            discount = new Discount(new JustDiscount());
+            discount.ExecuteDiscount(DisName2.Text, DisNameA2.Text, (100 - Convert.ToDouble(DisDis2.Text)) / 100);
+            MessageBox.Show("Знижку "+DisDis2.Text+"% на книгу"+DisName2.Text+" автора "+DisNameA2.Text+" надано!");
+            bob = new BaseOfBooks();
+            DisNameA1.Text = "";
+            DisDis1.Text = "";
+            data2.ItemsSource = bob.getList();
+        }
+        private void discount3(object sender, RoutedEventArgs e)
+        {
+            discount = new Discount(new DiscountPromocode());
+            discount.ExecuteDiscount(Promocode.Text,"",0);
+            MessageBox.Show("Промокод "+ Promocode.Text+" додано до бази даних!");
+            Promocode.Text = "";
+        }
+        private void discount4(object sender, RoutedEventArgs e)
+        {
+            discount = new Discount(new RemoveDiscount());
+            discount.ExecuteDiscount("", "", 0);
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            Discount_System.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_10(object sender, RoutedEventArgs e)
+        {
+            Discount_System.Visibility = Visibility.Visible;
         }
     }
 }

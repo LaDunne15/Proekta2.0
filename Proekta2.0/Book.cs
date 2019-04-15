@@ -27,5 +27,6 @@ namespace Proekta2._0
             ImagePath = G;
             Count_Selled = H;
         }
+
     }
 }
