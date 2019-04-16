@@ -53,7 +53,7 @@ namespace Proekta2._0
 
         public void DellAcc(Book A)
         {
-            string c = "DELETE  FROM Books WHERE Name='"+A.Name+"' AND AuthorName ='"+A.Author+"'";
+            string c = "DELETE  FROM Books WHERE Name='" + A.Name + "' AND AuthorName ='" + A.Author + "'";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -65,7 +65,7 @@ namespace Proekta2._0
         public void AddBook(Book A)
         {
             l.Add(A);
-            string c = "INSERT INTO Books (Name,AuthorName,Price,About,Genre,Discount_Rate,Image_Path,Count_Selled) VALUES ('"+A.Name+"','"+A.Author+"',"+A.price+",'"+A.About+"',"+A.Genre+","+A.discount+",'"+A.ImagePath+"',"+A.Count_Selled+")";
+            string c = "INSERT INTO Books (Name,AuthorName,Price,About,Genre,Discount_Rate,Image_Path,Count_Selled) VALUES ('" + A.Name + "','" + A.Author + "'," + A.price + ",'" + A.About + "'," + A.Genre + "," + A.discount + ",'" + A.ImagePath + "'," + A.Count_Selled + ")";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -85,6 +85,138 @@ namespace Proekta2._0
                 }
             }
             return A;
+        }
+
+        public void DiscountUpdate(string A,string B,double C)
+        {
+            foreach(var i in l)
+            {
+                if(i.Name==A && i.Author==B)
+                {
+                    i.discount = C;
+                }
+            }
+         }
+        public void DiscountUpdate(string A, double C)
+        {
+            foreach (var i in l)
+            {
+                if (i.Name == A)
+                {
+                    i.discount = C;
+                }
+            }
+        }
+        public void DiscountUpdate()
+        {
+            foreach (var i in l)
+            {
+                    i.discount = 1;
+            }
+        }
+
+        public void CHName(string A, string B,string C)
+        {
+            foreach (Book i in l)
+            {
+                if (i.Name== A && i.Author==B)
+                {
+                    i.Name = C;
+                }
+            }
+            string c = "UPDATE Books SET Name='" + C + "' WHERE Name='" + A + "' AND AuthorName='"+B+"'";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(c, connection);
+                SqlDataReader DD = command.ExecuteReader();
+            }
+        }
+        public void CHAuthor(string A, string B, string C)
+        {
+            foreach (Book i in l)
+            {
+                if (i.Name == A && i.Author == B)
+                {
+                    i.Author = C;
+                }
+            }
+            string c = "UPDATE Books SET AuthorName='" + C + "' WHERE Name='" + A + "' AND AuthorName='" + B + "'";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(c, connection);
+                SqlDataReader DD = command.ExecuteReader();
+            }
+        }
+
+        public void CHGenre(string A, string B, int C)
+        {
+            foreach (Book i in l)
+            {
+                if (i.Name == A && i.Author == B)
+                {
+                    i.Genre = C;
+                }
+            }
+            string c = "UPDATE Books SET Genre='" + C + "' WHERE Name='" + A + "' AND AuthorName='" + B + "'";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(c, connection);
+                SqlDataReader DD = command.ExecuteReader();
+            }
+        }
+        public void CHAbout(string A, string B, string C)
+        {
+            foreach (Book i in l)
+            {
+                if (i.Name == A && i.Author == B)
+                {
+                    i.About = C;
+                }
+            }
+            string c = "UPDATE Books SET About='" + C + "' WHERE Name='" + A + "' AND AuthorName='" + B + "'";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(c, connection);
+                SqlDataReader DD = command.ExecuteReader();
+            }
+        }
+        public void CHPrice(string A, string B, double C)
+        {
+            foreach (Book i in l)
+            {
+                if (i.Name == A && i.Author == B)
+                {
+                    i.price = C;
+                }
+            }
+            string c = "UPDATE Books SET Price='" + C + "' WHERE Name='" + A + "' AND AuthorName='" + B + "'";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(c, connection);
+                SqlDataReader DD = command.ExecuteReader();
+            }
+        }
+        public void CHImage_path(string A, string B, string C)
+        {
+            foreach (Book i in l)
+            {
+                if (i.Name == A && i.Author == B)
+                {
+                    i.ImagePath = C;
+                }
+            }
+            string c = "UPDATE Books SET Image_Path='" + C + "' WHERE Name='" + A + "' AND AuthorName='" + B + "'";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(c, connection);
+                SqlDataReader DD = command.ExecuteReader();
+            }
         }
     }
 }

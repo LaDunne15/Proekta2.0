@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Proekta2._0"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" Height="300" Width="320">
-    <Grid Background="#4CCD5656" Margin="5,5,0,10">
+    <Grid Background="#7F000000" Margin="5,5,0,10">
         <TextBlock Text="Книга" FontFamily="Jura" Foreground="White" FontSize="18" TextWrapping="Wrap" Margin="8,177,13,38" />
         <TextBlock Text="Автор" FontFamily="Jura" Foreground="White" Margin="9,249,9,8" />
         <TextBlock Text="50₴" FontFamily="Jura" Foreground="White" Margin="166,129,1,104" TextAlignment="Center" FontSize="36" />

@@ -162,7 +162,7 @@ namespace Proekta2._0
         {
             Grid grid = new Grid();
             var bc = new BrushConverter();
-            grid.Background = (Brush)bc.ConvertFrom("#4CCD5656");
+            grid.Background = (Brush)bc.ConvertFrom("#4CFFB7B7");
             grid.Margin = new Thickness(5, 5, 0, 10);
             grid.Height = 300;
             grid.Width = 320;
@@ -589,7 +589,9 @@ namespace Proekta2._0
             discount = new Discount(new DiscountByAuthor());
             discount.ExecuteDiscount("",DisNameA1.Text, (100-Convert.ToDouble(DisDis1.Text))/100);
             MessageBox.Show("Знижку "+DisDis1.Text+"% на всі книги "+DisNameA1.Text+" надано!");
-            bob = new BaseOfBooks();
+            bob.DiscountUpdate(DisNameA1.Text, ((100 - Convert.ToDouble(DisDis1.Text)) / 100));
+            data2.ItemsSource = null;
+            data2.ItemsSource = bob.getList();
             DisNameA1.Text = "";
             DisDis1.Text = "";
         }
@@ -598,10 +600,11 @@ namespace Proekta2._0
             discount = new Discount(new JustDiscount());
             discount.ExecuteDiscount(DisName2.Text, DisNameA2.Text, (100 - Convert.ToDouble(DisDis2.Text)) / 100);
             MessageBox.Show("Знижку "+DisDis2.Text+"% на книгу"+DisName2.Text+" автора "+DisNameA2.Text+" надано!");
-            bob = new BaseOfBooks();
+            bob.DiscountUpdate(DisName2.Text,DisNameA2.Text, ((100 - Convert.ToDouble(DisDis1.Text)) / 100));
+            data2.ItemsSource = null;
+            data2.ItemsSource = bob.getList();
             DisNameA1.Text = "";
             DisDis1.Text = "";
-            data2.ItemsSource = bob.getList();
         }
         private void discount3(object sender, RoutedEventArgs e)
         {
@@ -614,6 +617,8 @@ namespace Proekta2._0
         {
             discount = new Discount(new RemoveDiscount());
             discount.ExecuteDiscount("", "", 0);
+            data2.ItemsSource = null;
+            data2.ItemsSource = bob.getList();
         }
 
         private void Button_Click_9(object sender, RoutedEventArgs e)
@@ -624,6 +629,120 @@ namespace Proekta2._0
         private void Button_Click_10(object sender, RoutedEventArgs e)
         {
             Discount_System.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click_11(object sender, RoutedEventArgs e)
+        {
+            ChangeBook.Visibility = Visibility.Visible;
+            Book ibook = bob.getList().ElementAt(indexbook);
+            CB_About.Text = ibook.About;
+            CB_Name.Text = ibook.Name;
+            CB_Author.Text = ibook.Author;
+            CB2_About.Text = ibook.About;
+            CB2_Name.Text = ibook.Name;
+            CB2_Author.Text = ibook.Author;
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory().ToString());
+            bitmap.UriSource = new Uri(di.Parent.Parent.FullName + @"\images\" + ibook.ImagePath);
+            bitmap.EndInit();
+            CB2__Image.Source = bitmap;
+            CB_Image.Source = bitmap;
+            CB2_Image.Text = ibook.ImagePath;
+            CB_Genre.Text = GenreFromIndex(ibook.Genre);
+            CB2_Genre.SelectedIndex = ibook.Genre-1;
+            CB_Price.Text = ibook.price+"";
+            Price.Text = ibook.price + "";
+
+        }
+
+        private void Button_Click_12(object sender, RoutedEventArgs e)
+        {
+            ChangeBook.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_13(object sender, RoutedEventArgs e)
+        {
+            bob.CHName(CB_Name.Text, CB_Author.Text, CB2_Name.Text);
+            MessageBox.Show("Назву успішно змінено!");
+            CB_Name.Text = CB2_Name.Text;
+            data2.ItemsSource = null;
+            data2.ItemsSource = bob.getList();
+        }
+
+        private void Button_Click_14(object sender, RoutedEventArgs e)
+        {
+            bob.CHAuthor(CB_Name.Text, CB_Author.Text, CB2_Author.Text);
+            MessageBox.Show("Автора успішно змінено!");
+            CB_Author.Text = CB2_Author.Text;
+            data2.ItemsSource = null;
+            data2.ItemsSource = bob.getList();
+        }
+
+        private void Button_Click_15(object sender, RoutedEventArgs e)
+        {
+            bob.CHGenre(CB_Name.Text, CB_Author.Text, CB2_Genre.SelectedIndex+1);
+            MessageBox.Show("Жанр успішно змінено!");
+            CB_Genre.Text = GenreFromIndex(CB2_Genre.SelectedIndex+1);
+            data2.ItemsSource = null;
+            data2.ItemsSource = bob.getList();
+        }
+
+        private void Button_Click_16(object sender, RoutedEventArgs e)
+        {
+            bob.CHAbout(CB_Name.Text, CB_Author.Text, CB2_About.Text);
+            MessageBox.Show("Опис успішно змінено!");
+            CB_About.Text = CB2_About.Text;
+            data2.ItemsSource = null;
+            data2.ItemsSource = bob.getList();
+        }
+
+        private void Button_Click_17(object sender, RoutedEventArgs e)
+        {
+            bob.CHPrice(CB_Name.Text, CB_Author.Text, Convert.ToInt32(CB2_About.Text));
+            MessageBox.Show("Ціну успішно змінено!");
+            CB_Price.Text = Price.Text;
+            data2.ItemsSource = null;
+            data2.ItemsSource = bob.getList();
+        }
+        string imagepath2;
+        private void Button_Click_18(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Filter = "(*.jpg)|*.jpg|(*.png)|*.png|All files (*.*)|*.*";
+            dialog.FilterIndex = 2;
+            Nullable<bool> result = dialog.ShowDialog();
+            if (result == true)
+            {
+                _path = dialog.FileName;
+                imagepath2 = _path;
+                string[] a = _path.Split('.');
+                CB2_Image.Text = System.IO.Path.GetFileNameWithoutExtension(_path) + "." + a[a.Length - 1];
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory().ToString());
+                bitmap.UriSource = new Uri(_path);
+                bitmap.EndInit();
+                CB2__Image.Source = bitmap;
+            }
+        }
+
+        private void Button_Click_19(object sender, RoutedEventArgs e)
+        {
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory().ToString());
+            string a = di.Parent.Parent.FullName + @"\images\" + CB2_Image.Text;
+            File.Copy(imagepath2, a,true);
+            bob.CHImage_path(CB_Name.Text, CB_Author.Text, CB2_Image.Text);
+            MessageBox.Show("Картинку успішно змінено!");
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(imagepath2);
+            bitmap.EndInit();
+            CB_Image.Source = bitmap;
+
+            data2.ItemsSource = null;
+            data2.ItemsSource = bob.getList();
         }
     }
 }

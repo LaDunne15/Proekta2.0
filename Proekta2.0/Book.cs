@@ -27,6 +27,29 @@ namespace Proekta2._0
             ImagePath = G;
             Count_Selled = H;
         }
-
+        public void ChName(string A)
+        {
+            Name = A;
+        }
+        public void ChAuthor(string A)
+        {
+            Author = A;
+        }
+        public void ChPrice(double A)
+        {
+            price = A;
+        }
+        public void ChGenre(int A)
+        {
+            Genre = A;
+        }
+        public void ChPath(string A)
+        {
+            ImagePath = A;
+        }
+        public void ChAbout(string A)
+        {
+            About = A;
+        }
     }
 }

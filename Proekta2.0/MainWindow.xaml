@@ -10,7 +10,7 @@
     </Window.Resources>
     <Grid x:Name="main">
         <Grid.Background>
-            <ImageBrush ImageSource="darkredbackfround.png" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="back.png" Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid Height="50" VerticalAlignment="Top" Background="#FF8D4747">
             <Button Height="50" Width=" 70" Margin="900,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click">
@@ -132,7 +132,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="Reg" Visibility="Visible" Background="#FF440A0A">
+        <Grid x:Name="Reg" Visibility="Hidden" Background="#FF440A0A">
             <Rectangle Fill="White" Margin="300,25,300,50"></Rectangle>
             <TextBox x:Name="Log" HorizontalAlignment="Left" Height="30" Margin="450,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
             <PasswordBox x:Name="Pass" HorizontalAlignment="Left" Height="30" Margin="450,300,0,0" VerticalAlignment="Top" Width="200" PasswordChar="*"/>
@@ -229,6 +229,9 @@
             <Button Margin="998,204,12,303" Height="Auto" Click="Button_Click_10">
                 <materialDesign:PackIcon Kind="Discount" Foreground="White" Height="20" Width="20"/>
             </Button>
+            <Button Margin="998,133,12,374" Height="Auto" Click="Button_Click_11">
+                <materialDesign:PackIcon Kind="About" Foreground="White" Height="20" Width="20"/>
+            </Button>
         </Grid>
         <Grid  Background="#BF000000" x:Name="BookInfo" Visibility="Hidden">
             <Rectangle Margin="75,5,75,15" Fill="White"/>
@@ -286,6 +289,52 @@
             <TextBlock HorizontalAlignment="Left" Margin="42,484,0,0" TextWrapping="Wrap" Text="- скасувати всі знижки;" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <Button Content="Скасувати" Height="Auto" Margin="35,517,295,15" Background="Black" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount4"/>
 
+        </Grid>
+        <Grid Background="#BF000000" x:Name="ChangeBook" Visibility="Hidden">
+            <Rectangle Fill="White" Margin="45,5,45,0"></Rectangle>
+            <Image x:Name="CB_Image" HorizontalAlignment="Left" Height="184" Margin="77,18,0,0" VerticalAlignment="Top" Width="256"/>
+            <TextBlock HorizontalAlignment="Left" Margin="345,26,0,0" TextWrapping="Wrap" Text="Назва книги" VerticalAlignment="Top" FontFamily="Jura" FontSize="24"/>
+            <TextBlock HorizontalAlignment="Left" Margin="363,62,0,0" TextWrapping="Wrap" Text="Ім'я автора" VerticalAlignment="Top" FontFamily="Jura" FontSize="24"/>
+            <TextBlock HorizontalAlignment="Left" Margin="431,96,0,0" TextWrapping="Wrap" Text="Жанр" VerticalAlignment="Top" FontFamily="Jura" FontSize="24"/>
+            <TextBlock HorizontalAlignment="Left" Margin="435,134,0,0" TextWrapping="Wrap" Text="Опис" VerticalAlignment="Top" FontFamily="Jura" FontSize="24"/>
+            <TextBlock HorizontalAlignment="Left" Margin="445,170,0,0" TextWrapping="Wrap" Text="Ціна" VerticalAlignment="Top" FontFamily="Jura" FontSize="24"/>
+            <Button HorizontalAlignment="Left" Margin="916,32,0,0" VerticalAlignment="Top" Width="72" Height="72" Background="{x:Null}" BorderBrush="Black" Click="Button_Click_12">
+                <materialDesign:PackIcon Foreground="Black" Kind="Close"/>
+            </Button>
+            <TextBox x:Name="CB2_Name" HorizontalAlignment="Left" Height="40" Margin="86,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="421"/>
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="3" Margin="72,212,0,0" VerticalAlignment="Top" Width="943"/>
+            <Button Content="Змінити назву" HorizontalAlignment="Left" Margin="527,227,0,0" VerticalAlignment="Top" Width="155" Height="39" Click="Button_Click_13">
+            </Button>
+            <TextBox x:Name="CB2_Author" HorizontalAlignment="Left" Height="40" Margin="86,280,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="421"/>
+            <Button Content="Змінити автора" HorizontalAlignment="Left" Margin="527,279,0,0" VerticalAlignment="Top" Width="155" Height="39" Click="Button_Click_14"/>
+            <Button Content="Змінити жанр" HorizontalAlignment="Left" Margin="527,333,0,0" VerticalAlignment="Top" Width="155" Height="39" Click="Button_Click_15"/>
+            <TextBox x:Name="CB2_About" HorizontalAlignment="Left" Height="40" Margin="86,388,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="421"/>
+            <Button Content="Змінити опис" HorizontalAlignment="Left" Margin="527,387,0,0" VerticalAlignment="Top" Width="155" Height="39" Click="Button_Click_16"/>
+            <TextBox x:Name="Price" HorizontalAlignment="Left" Height="40" Margin="86,442,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="423"/>
+            <Button Content="Змінити ціну" HorizontalAlignment="Left" Margin="527,441,0,0" VerticalAlignment="Top" Width="155" Height="39" Click="Button_Click_17"/>
+            <TextBlock x:Name="CB2_Image" HorizontalAlignment="Left" Height="36" Margin="712,264,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="296"/>
+            <Button Content="Змінити картинку" HorizontalAlignment="Left" Margin="710,497,0,0" VerticalAlignment="Top" Width="302" Height="43" Click="Button_Click_19"/>
+            <ComboBox x:Name="CB2_Genre" HorizontalAlignment="Left" Margin="84,337,0,0" VerticalAlignment="Top" Width="425" Height="41" FontFamily="Jura" FontSize="12" BorderBrush="#89000000" Foreground="Black" Background="White">
+                <ComboBoxItem Content="Бізнес і інвестиції"></ComboBoxItem>
+                <ComboBoxItem Content="Біографії і мемуари"></ComboBoxItem>
+                <ComboBoxItem Content="Детективи і триллери"></ComboBoxItem>
+                <ComboBoxItem Content="Для дітей"></ComboBoxItem>
+                <ComboBoxItem Content="Здоров'я і спорт"></ComboBoxItem>
+                <ComboBoxItem Content="Історія"></ComboBoxItem>
+                <ComboBoxItem Content="Комп'ютери і технології"></ComboBoxItem>
+                <ComboBoxItem Content="Кулінарія і домашнє господарство"></ComboBoxItem>
+                <ComboBoxItem Content="Романи"></ComboBoxItem>
+                <ComboBoxItem Content="Фантастика і фентезі"></ComboBoxItem>
+                <ComboBoxItem Content="Художня література"></ComboBoxItem>
+            </ComboBox>
+            <TextBlock x:Name="CB_Name" HorizontalAlignment="Left" Margin="511,26,0,0" TextWrapping="Wrap" Text="Назва книги" VerticalAlignment="Top" FontFamily="Jura" FontSize="12" Height="35" Width="391"/>
+            <TextBlock x:Name="CB_Author" HorizontalAlignment="Left" Margin="511,62,0,0" TextWrapping="Wrap" Text="Ім'я автора" VerticalAlignment="Top" FontFamily="Jura" FontSize="12" Height="35" Width="391"/>
+            <TextBlock x:Name="CB_Genre" HorizontalAlignment="Left" Margin="511,96,0,0" TextWrapping="Wrap" Text="Жанр" VerticalAlignment="Top" FontFamily="Jura" FontSize="12" Height="35" Width="391"/>
+            <TextBlock x:Name="CB_About" HorizontalAlignment="Left" Margin="511,134,0,0" TextWrapping="Wrap" Text="Опис" VerticalAlignment="Top" FontFamily="Jura" FontSize="12" Height="35" Width="391"/>
+            <TextBlock x:Name="CB_Price" HorizontalAlignment="Left" Margin="511,170,0,0" TextWrapping="Wrap" Text="Ціна" VerticalAlignment="Top" FontFamily="Jura" FontSize="12" Height="35" Width="391"/>
+            <Button Content="Вибратити картинку" HorizontalAlignment="Left" Margin="712,224,0,0" VerticalAlignment="Top" Width="298" Height="37" Click="Button_Click_18"/>
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="316" Margin="694,226,0,0" VerticalAlignment="Top" Width="4" RenderTransformOrigin="0.5,0.5"/>
+            <Image x:Name="CB2__Image" HorizontalAlignment="Left" Height="186" Margin="720,304,0,0" VerticalAlignment="Top" Width="284"/>
         </Grid>
     </Grid>
 </Window>
