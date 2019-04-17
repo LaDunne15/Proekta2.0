@@ -28,6 +28,7 @@ namespace Proekta2._0
         BaseOfBooks bob = new BaseOfBooks();
         List<Book> oneGenrebooks;
         List<Book> basket;
+        BasketBook basketBook = new BasketBook();
         Account seller;
         string _path;
         Discount discount;
@@ -280,9 +281,10 @@ namespace Proekta2._0
         }
         private void addtoBasket(object sender, RoutedEventArgs e)
         {
-            TextBlock tb = new TextBlock();
-            tb.Text = ((Button)sender).Name;
-            list_b.Children.Add(tb);
+            int i = Convert.ToInt32(((Button)sender).Name.Replace("i",""));
+            basketBook.AddBook(oneGenrebooks.ElementAt(i));
+            AddToBasket(oneGenrebooks.ElementAt(i));
+            AllPrice.Text = basketBook.getSumm()+ "₴";
         }
 
         private void Log_in(object sender, RoutedEventArgs e)
@@ -608,10 +610,15 @@ namespace Proekta2._0
         }
         private void discount3(object sender, RoutedEventArgs e)
         {
-            discount = new Discount(new DiscountPromocode());
-            discount.ExecuteDiscount(Promocode.Text,"",0);
-            MessageBox.Show("Промокод "+ Promocode.Text+" додано до бази даних!");
-            Promocode.Text = "";
+            if (Promocode.Text != "")
+            {
+                discount = new Discount(new DiscountPromocode());
+                discount.ExecuteDiscount(Promocode.Text, "", 0);
+                MessageBox.Show("Промокод " + Promocode.Text + " додано до бази даних!");
+                Promocode.Text = "";
+                Promocodedb db = new Promocodedb();
+                promocodes.ItemsSource = db.list;
+            }
         }
         private void discount4(object sender, RoutedEventArgs e)
         {
@@ -629,6 +636,8 @@ namespace Proekta2._0
         private void Button_Click_10(object sender, RoutedEventArgs e)
         {
             Discount_System.Visibility = Visibility.Visible;
+            Promocodedb db = new Promocodedb();
+            promocodes.ItemsSource = db.list;
         }
 
         private void Button_Click_11(object sender, RoutedEventArgs e)
@@ -743,6 +752,175 @@ namespace Proekta2._0
 
             data2.ItemsSource = null;
             data2.ItemsSource = bob.getList();
+        }
+
+        private void AddToBasket(Book A)
+        {
+            Grid g = new Grid();
+            g.Height = 92;
+            var bc = new BrushConverter();
+            g.Background = (Brush)bc.ConvertFrom("#FFF9F9F9");
+            g.Margin = new Thickness(5, 5, 5, 0);
+
+            TextBlock tb1 = new TextBlock();
+            tb1.FontFamily = new FontFamily("Jura");
+            tb1.Text = A.Name;
+            tb1.FontSize = 18;
+            tb1.Height = 82;
+            tb1.VerticalAlignment = VerticalAlignment.Top;
+            tb1.TextWrapping = TextWrapping.Wrap;
+            tb1.Margin = new Thickness(119, 6, 134, 0);
+            g.Children.Add(tb1);
+
+            TextBlock tb2 = new TextBlock();
+            tb2.FontFamily = new FontFamily("Jura");
+            tb2.Text = A.price*A.discount+"₴";
+            tb2.FontSize = 32;
+            tb2.Height = 50;
+            tb2.TextAlignment = TextAlignment.Center;
+            tb2.Margin = new Thickness(345, 4, 4, 38);
+            g.Children.Add(tb2);
+
+            MaterialDesignThemes.Wpf.PackIcon i = new MaterialDesignThemes.Wpf.PackIcon();
+            i.Kind = MaterialDesignThemes.Wpf.PackIconKind.Information;
+            i.Foreground = Brushes.White;
+
+            Button b2 = new Button();
+            b2.Name = "inf" + basketBook.getCount();
+            var bc2 = new BrushConverter();
+            b2.Click += InfoAboutBook;
+            b2.Background = (Brush)bc.ConvertFrom("#FFD19743");
+            b2.BorderBrush = (Brush)bc.ConvertFrom("#FFD19743");
+            b2.Margin = new Thickness(339, 57, 74, 5);
+            b2.Height = Double.NaN;
+            b2.Content = i;
+            g.Children.Add(b2);
+
+            MaterialDesignThemes.Wpf.PackIcon i2 = new MaterialDesignThemes.Wpf.PackIcon();
+            i2.Kind = MaterialDesignThemes.Wpf.PackIconKind.Trash;
+            i2.Foreground = Brushes.White;
+
+            Button b = new Button();
+            b.Click += DeleteFromBaslet;
+            b.Name = "del" + basketBook.getCount();
+            b.Margin = new Thickness(408, 57, 5, 5);
+            b.Height = Double.NaN;
+            b.Content = i2;
+            g.Children.Add(b);
+
+            Image im = new Image();
+            im.HorizontalAlignment = HorizontalAlignment.Left;
+            im.Height = 92;
+            im.Margin = new Thickness(13, 0, 0, 0);
+            im.VerticalAlignment = VerticalAlignment.Top;
+            im.Width = 100;
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory().ToString());
+            bitmap.UriSource = new Uri(di.Parent.Parent.FullName + @"\images\" + A.ImagePath);
+            bitmap.EndInit();
+            im.Source = bitmap;
+
+            g.Children.Add(im);
+
+            list_b.Children.Add(g);
+        }
+
+        private void Button_Click_20(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult2 = MessageBox.Show("Скасувати замовлення?", "Замовлення", MessageBoxButton.YesNo);
+            if (messageBoxResult2 == MessageBoxResult.Yes)
+            {
+                list_b.Children.Clear();
+                basketBook = new BasketBook();
+                AllPrice.Text = "0₴";
+                PR.Background = (Brush)bc2.ConvertFrom("#FFF44336");
+                PR.BorderBrush = (Brush)bc2.ConvertFrom("#FFF44336");
+                indicator.Kind = MaterialDesignThemes.Wpf.PackIconKind.Search;
+                CheckPromocode.Text = "";
+            }
+        }
+        private void DeleteFromBaslet(object sender, RoutedEventArgs e)
+        {
+            Book ibook = basketBook.getBookAt(Convert.ToInt32((((Button)sender).Name).Replace("del", "")));
+            basketBook.DeleteBook(ibook);
+            list_b.Children.Clear();
+            foreach(var i in basketBook.getlist())
+            {
+                AddToBasket(i);
+            }
+            AllPrice.Text = basketBook.getSumm() + "₴";
+        }
+        private void InfoAboutBook(object sender, RoutedEventArgs e)
+        {
+            BookInfo.Visibility = Visibility.Visible;
+            Book ibook = basketBook.getBookAt(Convert.ToInt32((((Button)sender).Name).Replace("inf","")));
+            IB_About.Text = ibook.About;
+            IB_name.Text = ibook.Name;
+            IB_Author.Text = ibook.Author;
+
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory().ToString());
+            bitmap.UriSource = new Uri(di.Parent.Parent.FullName + @"\images\" + ibook.ImagePath);
+            bitmap.EndInit();
+
+            IB_Image.Source = bitmap;
+            IB_Count.Text = ibook.Count_Selled + "";
+            IB_Genre.Text = GenreFromIndex(ibook.Genre);
+
+            if (ibook.discount == 1)
+            {
+                IB_Price1.Text = "";
+                IB_Price2.Text = ibook.price + "₴";
+            }
+            else
+            {
+                IB_Price1.Text = ibook.price + "₴";
+                IB_Price1.TextDecorations = TextDecorations.Strikethrough;
+                IB_Price2.Text = (ibook.price * ibook.discount) + "₴";
+            }
+        }
+
+        BrushConverter bc2 = new BrushConverter();
+        private void Button_Click_21(object sender, RoutedEventArgs e)
+        {
+            Promocodedb promocodedb = new Promocodedb();
+            if(promocodedb.isChecked(CheckPromocode.Text))
+            {
+                MessageBox.Show("Промокод підтвердений!");
+                PR.Background = (Brush)bc2.ConvertFrom("#FF77C161");
+                PR.BorderBrush = (Brush)bc2.ConvertFrom("#FF77C161");
+                indicator.Kind = MaterialDesignThemes.Wpf.PackIconKind.Done;
+                basketBook.setPromocode();
+                AllPrice.Text = basketBook.getSumm() + "₴";
+            }
+            else
+            {
+                MessageBox.Show("Промокод не підтвердений!");
+                PR.Background = (Brush)bc2.ConvertFrom("#FFBC34E4");
+                PR.BorderBrush = (Brush)bc2.ConvertFrom("#FFBC34E4");
+                indicator.Kind = MaterialDesignThemes.Wpf.PackIconKind.Clear;
+            }
+        }
+
+        private void Button_Click_22(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult2 = MessageBox.Show("Оформити замовлення?", "Замовлення", MessageBoxButton.YesNo);
+            if (messageBoxResult2 == MessageBoxResult.Yes)
+            {
+                list_b.Children.Clear();
+                bob.SellBooks(basketBook.getlist());
+                lists.Sell(basketBook.getCount(),seller);
+                basketBook = new BasketBook();
+                AllPrice.Text = "0₴";
+
+                PR.Background = (Brush)bc2.ConvertFrom("#FFF44336");
+                PR.BorderBrush = (Brush)bc2.ConvertFrom("#FFF44336");
+                indicator.Kind = MaterialDesignThemes.Wpf.PackIconKind.Search;
+                CheckPromocode.Text = "";
+            }
         }
     }
 }

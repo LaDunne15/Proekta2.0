@@ -9,15 +9,19 @@
     <Window.Resources>
     </Window.Resources>
     <Grid x:Name="main">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320*"/>
+            <ColumnDefinition Width="217*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="back.png" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Grid Height="50" VerticalAlignment="Top" Background="#FF8D4747">
+        <Grid Height="50" VerticalAlignment="Top" Background="#FF8D4747" Grid.ColumnSpan="2">
             <Button Height="50" Width=" 70" Margin="900,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click">
                 <materialDesign:PackIcon Kind="ShoppingBasket"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
             </Button>
         </Grid>
-        <ScrollViewer Margin="20,50,0,0">
+        <ScrollViewer Margin="20,50,0,0" Grid.ColumnSpan="2">
             <WrapPanel  x:Name="books">
             </WrapPanel>
         </ScrollViewer>
@@ -118,21 +122,28 @@
                 <materialDesign:PackIcon Kind="ArrowLeftBold" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="4.75,1.2"/>
             </Button>
         </Grid>
-        <Grid x:Name="Basket" HorizontalAlignment="Right" Margin="0,50,0,0" Background="White" Width="0">
-            <ScrollViewer Background="#FFC9C9C9">
+        <Grid x:Name="Basket" HorizontalAlignment="Right" Margin="0,50,0,0" Background="White" Width="0" Grid.ColumnSpan="2">
+            <ScrollViewer Background="#FFC9C9C9" Margin="0,0,0,100">
                 <StackPanel x:Name="list_b">
-                    <Grid Height="92" Background="#FFF9F9F9" Margin="5,5,5,5">
-                        <TextBlock FontFamily="Jura" Text="Книга" FontSize="18" Height="82" VerticalAlignment="Top" TextWrapping="Wrap" Margin="123,6,130,0"/>
-                        <TextBlock FontFamily="Jura" Text="50₴" FontSize="28" Height="50" Width="93" TextAlignment="Center" Margin="376,4,4,38" />
-                        <Button Height="Auto" Margin="423,57,5,5">
-                            <materialDesign:PackIcon Kind="Trash"/>
-                        </Button>
-                        <Image HorizontalAlignment="Left" Height="92" Margin="13,0,0,0" VerticalAlignment="Top" Width="100" Source="std_book.png"/>
-                    </Grid>
                 </StackPanel>
             </ScrollViewer>
+            <Grid Margin="0,407,0,0" Background="#FFF44336">
+                <Button Content="Замовити" HorizontalAlignment="Left" Margin="382,55,0,0" VerticalAlignment="Top" Width="111" Height="41" BorderBrush="#FFD19743" Background="#FFD19743" Foreground="#DDFFFFFF" RenderTransformOrigin="0.5,0.5" FontFamily="Jura" Click="Button_Click_22">
+                </Button>
+                <Button HorizontalAlignment="Left" Margin="328,55,0,0" VerticalAlignment="Top" Width="47" Height="41" BorderBrush="#FFAAAAAA" Background="#FFAAAAAA" Foreground="#DDFFFFFF" RenderTransformOrigin="0.5,0.5" FontFamily="Jura" Click="Button_Click_20">
+                    <materialDesign:PackIcon Kind="Cancel"/>
+                </Button>
+                <TextBlock HorizontalAlignment="Left" Margin="3,-16,0,0" TextWrapping="Wrap" Text="Σ=" VerticalAlignment="Top" FontFamily="Jura" FontSize="75" Foreground="White" Height="79" Width="95"/>
+                <TextBlock x:Name="AllPrice" HorizontalAlignment="Left" Margin="96,0,0,0" TextWrapping="Wrap" Text="0₴" VerticalAlignment="Top" FontFamily="Jura" FontSize="50" Foreground="White" Height="60" Width="228"/>
+                <TextBox x:Name="CheckPromocode" HorizontalAlignment="Left" Height="25" Margin="329,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="119" Foreground="White" BorderBrush="#89FFFFFF" CaretBrush="#FFD19743"/>
+                <TextBlock HorizontalAlignment="Left" Margin="329,-1,0,0" TextWrapping="Wrap" Text="Промокод:" VerticalAlignment="Top" FontFamily="Jura" Foreground="White" Height="20" Width="71"/>
+                <Button x:Name="PR" HorizontalAlignment="Left" Margin="451,8,0,0" VerticalAlignment="Top" Width="43" Height="34" Foreground="#DDFFFFFF" RenderTransformOrigin="0.5,0.5" FontFamily="Jura" Click="Button_Click_21" Background="#FFF43636">
+                    <materialDesign:PackIcon x:Name="indicator" Kind="Search" Height="14" Width="12"/>
+                </Button>
+
+            </Grid>
         </Grid>
-        <Grid x:Name="Reg" Visibility="Hidden" Background="#FF440A0A">
+        <Grid x:Name="Reg" Visibility="Hidden" Background="#FF440A0A" Grid.ColumnSpan="2">
             <Rectangle Fill="White" Margin="300,25,300,50"></Rectangle>
             <TextBox x:Name="Log" HorizontalAlignment="Left" Height="30" Margin="450,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
             <PasswordBox x:Name="Pass" HorizontalAlignment="Left" Height="30" Margin="450,300,0,0" VerticalAlignment="Top" Width="200" PasswordChar="*"/>
@@ -158,7 +169,7 @@
                 <TextBlock HorizontalAlignment="Left" Margin="42,286,0,0" TextWrapping="Wrap" Text="Ще раз" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
             </Grid>
         </Grid>
-        <Grid x:Name="Change_Acc" Background="#E5000000" Height="600" Width="1080" Visibility="Hidden">
+        <Grid x:Name="Change_Acc" Background="#E5000000" Height="600" Width="1080" Visibility="Hidden" Grid.ColumnSpan="2" Margin="0,0,-6,-29">
             <Rectangle Height="500" Width="500" Fill="White"/>
             <Button Height="40" Margin="713,47,299,484" Background="{x:Null}" BorderBrush="{x:Null}" Click="ChangeAccounts">
                 <materialDesign:PackIcon Kind="Close" Foreground="#DD000000" Height="35" Width="35"/>
@@ -182,7 +193,7 @@
                 <materialDesign:PackIcon Kind="Trash" Foreground="Black"/>
             </Button>
         </Grid>
-        <Grid x:Name="Change_Team" Height="600" Width="1080" Background="DarkRed" Visibility="Hidden">
+        <Grid x:Name="Change_Team" Height="600" Width="1080" Background="DarkRed" Visibility="Hidden" Grid.ColumnSpan="2" Margin="0,0,-6,-29">
             <Button x:Name="Close" HorizontalAlignment="Left" Margin="977,12,0,0" VerticalAlignment="Top" Width="68" Height="62" Background="{x:Null}" BorderBrush="{x:Null}" Click="OpenTeam">
                 <materialDesign:PackIcon Kind="Close" Foreground="White" Height="25" Width="25"/>
             </Button>
@@ -193,7 +204,7 @@
                 <materialDesign:PackIcon Kind="Trashcan"/>
             </Button>
         </Grid>
-        <Grid Background="Black" x:Name="Change_Library" Visibility="Hidden">
+        <Grid Background="Black" x:Name="Change_Library" Visibility="Hidden" Grid.ColumnSpan="2">
             <Button Margin="998,12,12,495" Height="Auto" Click="Ch_Lib">
                 <materialDesign:PackIcon Kind="Close" Foreground="White" Height="20" Width="20"/>
             </Button>
@@ -233,7 +244,7 @@
                 <materialDesign:PackIcon Kind="About" Foreground="White" Height="20" Width="20"/>
             </Button>
         </Grid>
-        <Grid  Background="#BF000000" x:Name="BookInfo" Visibility="Hidden">
+        <Grid  Background="#BF000000" x:Name="BookInfo" Visibility="Hidden" Grid.ColumnSpan="2">
             <Rectangle Margin="75,5,75,15" Fill="White"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="250" Margin="102,15,0,0" VerticalAlignment="Top" Width="300"/>
             <Image x:Name="IB_Image" Source="std_book.png" Margin="112,25,0,0" Height="230" Width="280" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -250,7 +261,7 @@
             <TextBlock Text="екземплярів" HorizontalAlignment="Left" Margin="764,292,0,0" VerticalAlignment="Top" Height="26" Width="152" FontFamily="Jura" FontSize="20" TextWrapping="Wrap"/>
             <TextBlock x:Name="IB_Price1" Text="Ціна" HorizontalAlignment="Left" Margin="140,324,0,0" VerticalAlignment="Top" Height="50" Width="210" FontFamily="Jura" FontSize="32" TextWrapping="Wrap" TextAlignment="Center"/>
         </Grid>
-        <Grid Background="DarkRed" Margin="515,0,15,0" x:Name="Discount_System" Visibility="Hidden">
+        <Grid Background="DarkRed" Margin="515,0,15,0" x:Name="Discount_System" Visibility="Hidden" Grid.ColumnSpan="2">
             <TextBlock HorizontalAlignment="Left" Margin="60,16,0,0" TextWrapping="Wrap" Text="Керування знижками:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="124" Margin="29,39,0,0" VerticalAlignment="Top" Width="431">
 
@@ -288,9 +299,12 @@
             <Button Content="Очистити поле" Height="Auto" Margin="50,392,336,140" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura"/>
             <TextBlock HorizontalAlignment="Left" Margin="42,484,0,0" TextWrapping="Wrap" Text="- скасувати всі знижки;" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <Button Content="Скасувати" Height="Auto" Margin="35,517,295,15" Background="Black" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount4"/>
+            <ListBox x:Name="promocodes" HorizontalAlignment="Left" Height="93" Margin="258,466,0,0" VerticalAlignment="Top" Width="273" Foreground="#DDFFFFFF" BorderBrush="White"/>
+            <TextBlock HorizontalAlignment="Left" Margin="272,440,0,0" TextWrapping="Wrap" Text="Список промокодів:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="183" Height="23"/>
+
 
         </Grid>
-        <Grid Background="#BF000000" x:Name="ChangeBook" Visibility="Hidden">
+        <Grid Background="#BF000000" x:Name="ChangeBook" Visibility="Hidden" Grid.ColumnSpan="2">
             <Rectangle Fill="White" Margin="45,5,45,0"></Rectangle>
             <Image x:Name="CB_Image" HorizontalAlignment="Left" Height="184" Margin="77,18,0,0" VerticalAlignment="Top" Width="256"/>
             <TextBlock HorizontalAlignment="Left" Margin="345,26,0,0" TextWrapping="Wrap" Text="Назва книги" VerticalAlignment="Top" FontFamily="Jura" FontSize="24"/>

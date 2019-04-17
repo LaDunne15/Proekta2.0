@@ -18,11 +18,20 @@ namespace Proekta2._0
         }
         public List<Book> getList()
         {
-            return l;
+            var d= from i in l
+            orderby i.Count_Selled descending
+            select i;
+
+            List<Book> ddd = new List<Book>() { };
+            foreach (var i in d)
+            {
+                ddd.Add(i);
+            }
+            return ddd;
         }
         public BaseOfBooks()
         {
-            string c = "SELECT * FROM Books";
+            string c = "SELECT * FROM Books order by Books.Count_Selled desc";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -217,6 +226,31 @@ namespace Proekta2._0
                 SqlCommand command = new SqlCommand(c, connection);
                 SqlDataReader DD = command.ExecuteReader();
             }
+        }
+        void SellBook(Book A)
+        {
+            string c = "Update Books Set Count_Selled = Count_Selled + 1 Where Name = '"+A.Name+"' And AuthorName = '"+A.Author+"'";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(c, connection);
+                SqlDataReader DD = command.ExecuteReader();
+            }
+        }
+        public void SellBooks(List<Book> A)
+        {
+            foreach(var i in A)
+            {
+                SellBook(i);
+                foreach(var j in l)
+                {
+                    if(j.Author==i.Author&&j.Name==i.Name)
+                    {
+                        j.Count_Selled++;
+                    }
+                }
+            }
+
         }
     }
 }

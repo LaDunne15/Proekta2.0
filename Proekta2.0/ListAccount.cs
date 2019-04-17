@@ -131,5 +131,23 @@ namespace Proekta2._0
                 SqlDataReader DD = command.ExecuteReader();
             }
         }
+
+        public void Sell(int a,Account b)
+        {
+            foreach (Account i in l)
+            {
+                if (i.Login==b.Login)
+                {
+                    i.count_selled += a;
+                }
+            }
+            string c = "UPDATE Accounts SET Count=Count+" + a + " WHERE Name='" + b.Name + "'";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(c, connection);
+                SqlDataReader DD = command.ExecuteReader();
+            }
+        }
     }
 }

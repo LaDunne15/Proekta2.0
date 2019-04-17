@@ -76,6 +76,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Basket.cs" />
+    <Compile Include="Promocodedb.cs" />
     <Compile Include="SystemDiscount.cs" />
     <Page Include="Book.xaml">
       <SubType>Designer</SubType>
