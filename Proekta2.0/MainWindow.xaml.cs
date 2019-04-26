@@ -35,8 +35,17 @@ namespace Proekta2._0
         public MainWindow()
         {
             InitializeComponent();
+            CountGenres();
         }
-        public string GenreFromIndex(int a)
+
+        bool IsGood(char c)
+        {
+            if (c >= '0' && c <= '9')
+                return true;
+            else
+                return false;
+        }
+            public string GenreFromIndex(int a)
         {
             switch (a)
             {
@@ -299,15 +308,25 @@ namespace Proekta2._0
                 seller_name.Text = seller.Name;
                 if (seller.isAdmin)
                 {
-                    ManageBooks.Height = 45;
+                    ManageBooks.Height = 32;
                     DeleteAcc.Visibility = Visibility.Hidden;
-                    MaganeWorkTeam.Height = 45;
+                    MaganeWorkTeam.Height = 32;
+                    Status.Text = "Адміністратор";
                 }
                 else
                 {
-                    ManageBooks.Height = 0;
                     DeleteAcc.Visibility = Visibility.Visible;
                     MaganeWorkTeam.Height = 0;
+                    if (seller.count_selled >= 500)
+                    {
+                        Status.Text = "Продавець із правами адміністратора";
+                        ManageBooks.Height = 32;
+                    }
+                    else
+                    {
+                        Status.Text = "Звичайний продавець";
+                        ManageBooks.Height = 0;
+                    }
                 }
             }
             else
@@ -561,16 +580,18 @@ namespace Proekta2._0
                 BookPath.Text = "";
                 BookPrice.Text = "";
             }
+            CountGenres();
         }
 
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {
             Book aa = bob.GetBookByID(indexbook);
-            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити книгу '" + aa.Name.Replace(" ","") + "' - " +aa.Author.Replace(" ","")  , "Видалити аккаунт", MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити книгу '" + aa.Name.Replace(" ","") + "' - " +aa.Author.Replace(" ","")  , "Видалити книгу", MessageBoxButton.YesNo);
             if (messageBoxResult2 == MessageBoxResult.Yes)
             {
                     bob.DellAcc(aa);
                     MessageBox.Show("Книгу видалено успішно");
+                    CountGenres();
                     lists = new ListAcc();
                     dataTeam.ItemsSource = null;
                     dataTeam.ItemsSource = lists.getList();
@@ -708,7 +729,7 @@ namespace Proekta2._0
 
         private void Button_Click_17(object sender, RoutedEventArgs e)
         {
-            bob.CHPrice(CB_Name.Text, CB_Author.Text, Convert.ToInt32(CB2_About.Text));
+            bob.CHPrice(CB_Name.Text, CB_Author.Text, Convert.ToDouble(Price.Text));
             MessageBox.Show("Ціну успішно змінено!");
             CB_Price.Text = Price.Text;
             data2.ItemsSource = null;
@@ -889,7 +910,7 @@ namespace Proekta2._0
             Promocodedb promocodedb = new Promocodedb();
             if(promocodedb.isChecked(CheckPromocode.Text))
             {
-                MessageBox.Show("Промокод підтвердений!");
+                MessageBox.Show("Промокод підтверджений!");
                 PR.Background = (Brush)bc2.ConvertFrom("#FF77C161");
                 PR.BorderBrush = (Brush)bc2.ConvertFrom("#FF77C161");
                 indicator.Kind = MaterialDesignThemes.Wpf.PackIconKind.Done;
@@ -920,6 +941,15 @@ namespace Proekta2._0
                 PR.BorderBrush = (Brush)bc2.ConvertFrom("#FFF44336");
                 indicator.Kind = MaterialDesignThemes.Wpf.PackIconKind.Search;
                 CheckPromocode.Text = "";
+            }
+        }
+
+        private void CountGenres()
+        {
+            for (int i = 1;i<=11;i++ )
+            {
+                StackPanel sp= (StackPanel)(((Button)_1.Children[i]).Content);
+                ((Label)(sp.Children[2])).Content = bob.OneTypeBooks(i).Count;
             }
         }
     }

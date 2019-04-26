@@ -138,7 +138,12 @@ namespace Proekta2._0
             {
                 if (i.Login==b.Login)
                 {
+                    int a1 = i.count_selled;
                     i.count_selled += a;
+                    if(a1<500 && i.count_selled>=500)
+                    {
+                        MessageBox.Show(i.Name+", ви щойно продали понад 500 книг. Будь ласка, перезайдіть!");
+                    }
                 }
             }
             string c = "UPDATE Accounts SET Count=Count+" + a + " WHERE Name='" + b.Name + "'";

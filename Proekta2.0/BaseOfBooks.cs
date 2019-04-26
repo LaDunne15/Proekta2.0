@@ -202,7 +202,7 @@ namespace Proekta2._0
                     i.price = C;
                 }
             }
-            string c = "UPDATE Books SET Price='" + C + "' WHERE Name='" + A + "' AND AuthorName='" + B + "'";
+            string c = "UPDATE Books SET Price=" + C + " WHERE Name='" + A + "' AND AuthorName='" + B + "'";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();

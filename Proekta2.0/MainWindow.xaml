@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Proekta2._0"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" Height="600" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" Background="Black">
+        mc:Ignorable="d" Height="600" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
     <Window.Resources>
     </Window.Resources>
     <Grid x:Name="main">
@@ -13,6 +13,7 @@
             <ColumnDefinition Width="320*"/>
             <ColumnDefinition Width="217*"/>
         </Grid.ColumnDefinitions>
+
         <Grid.Background>
             <ImageBrush ImageSource="back.png" Stretch="UniformToFill"/>
         </Grid.Background>
@@ -25,96 +26,124 @@
             <WrapPanel  x:Name="books">
             </WrapPanel>
         </ScrollViewer>
-        <Grid x:Name="Menuu" Width="0" HorizontalAlignment="Left" Background="#FF5B0D0D" Margin="0,0,0,0">
-
+        <Grid x:Name="Menuu" Width="0" HorizontalAlignment="Left"  Margin="0,0,0,0">
+            <Grid.Background>
+                <ImageBrush ImageSource="King.jpg" Stretch="UniformToFill"/>
+            </Grid.Background>
             <Button Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,-50,0" Click="Menu">
 
                 <materialDesign:PackIcon Kind="Menu" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Button>
-            <TextBlock Text="Вас обслуговує"  Margin="5,5,5,15" FontSize="16" FontFamily="Jura" Foreground="White"/>
-            <TextBlock x:Name="seller_name" Text="Якись-то працівник"  Margin="5,30,5,15" FontSize="20" FontFamily="Jura" Foreground="White" TextWrapping="Wrap"/>
-            <ScrollViewer Margin="0,100,0,0" HorizontalScrollBarVisibility="Hidden">
-                <StackPanel Width="220" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    <Rectangle Height="1" Width="Auto" Fill="White" Margin="5,5,5,5"></Rectangle>
+            <Grid Margin="0,0,50,470">
+                <Border BorderBrush="White" BorderThickness="1" Margin="3,2,-3,-11" Background="#7F080808"/>
+                <TextBlock Text="Вас обслуговує"  Margin="8,5,2,53" FontSize="16" FontFamily="Jura" Foreground="White"/>
+                <TextBlock x:Name="seller_name" Text="Якись-то працівник"  Margin="8,26,2,6" FontSize="20" FontFamily="Jura" Foreground="White" TextWrapping="Wrap"/>
+                
+            </Grid>
+            <ScrollViewer Margin="0,100,0,0" HorizontalScrollBarVisibility="Hidden" Background="#FF343434">
+                <StackPanel Width="220" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="_1" >
+                    <Rectangle Height="1" Width="Auto" Fill="#FF444444" Margin="5,5,5,0"></Rectangle>
                     <Button Margin="0,5,0,5" Click="GetGenre" x:Name="G1">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="ChartFinance"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Бізнес</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Бізнес</TextBlock>
+                            <Label x:Name="GC1" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
                     <Button Margin="0,0,0,5" Click="GetGenre" x:Name="G2">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="Person"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Біографії</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Біографії</TextBlock>
+                            <Label x:Name="GC2" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
                     <Button Margin="0,0,0,5"  Click="GetGenre" x:Name="G3">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="Search" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Детективи</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Детективи</TextBlock>
+                            <Label x:Name="GC3" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
                     <Button Margin="0,0,0,5"  Click="GetGenre" x:Name="G4">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="AccountChild" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Для дітей</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Для дітей</TextBlock>
+                            <Label x:Name="GC4" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
                     <Button Margin="0,0,0,5"  Click="GetGenre" x:Name="G5">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="Heart" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Здоров'я</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Здоров'я</TextBlock>
+                            <Label x:Name="GC5" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
                     <Button Margin="0,0,0,5"  Click="GetGenre" x:Name="G6">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="History" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Історія</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Історія</TextBlock>
+                            <Label x:Name="GC6" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
                     <Button Margin="0,0,0,5"  Click="GetGenre" x:Name="G7">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="Toolbox" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Технології</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Технології</TextBlock>
+                            <Label x:Name="GC7" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
                     <Button Margin="0,0,0,5"  Click="GetGenre" x:Name="G8">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="Kitchen" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Кухня</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Кухня</TextBlock>
+                            <Label x:Name="GC8" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
                     <Button Margin="0,0,0,5"  Click="GetGenre" x:Name="G9">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="Heart" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Романи</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Романи</TextBlock>
+                            <Label x:Name="GC9" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
                     <Button Margin="0,0,0,5"  Click="GetGenre" x:Name="G10">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="Magic" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Фантастика</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Фантастика</TextBlock>
+                            <Label x:Name="GC10" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
 
                     <Button Margin="0,0,0,5"  Click="GetGenre" x:Name="G11">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="200">
                             <materialDesign:PackIcon Kind="Museum" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <TextBlock>Художнє</TextBlock>
+                            <TextBlock Margin="5,0,0,0" MinWidth="130" MaxWidth="130">Художнє</TextBlock>
+                            <Label x:Name="GC11" Width="30" FontSize="8" Foreground="White">4444</Label>
                         </StackPanel>
                     </Button>
-                    <Rectangle Height="1" Width="Auto" Fill="White" Margin="0,0,0,5"></Rectangle>
-                    <Button x:Name="ManageBooks" Background="{x:Null}" Height="45" Click="Ch_Lib">
-                        <TextBlock TextWrapping="Wrap">Керування асортиментом книг</TextBlock>
+                    <Rectangle Height="1" Width="Auto" Fill="#FF444444" Margin="0,0,0,5"></Rectangle>
+                    <Button x:Name="ManageBooks" Background="{x:Null}" BorderBrush="White" Height="32" Click="Ch_Lib">
+                        <Grid Width="200">
+                        <TextBlock TextWrapping="Wrap">Керування асортиментом</TextBlock>
+                         </Grid>
                     </Button>
-                    <Button x:Name="MaganeWorkTeam" Margin="0,5,0,5" Background="{x:Null}" Height="45" Click="OpenTeam">
-                        <TextBlock TextWrapping="Wrap">Керування робочим колективом</TextBlock>
+                    <Button x:Name="MaganeWorkTeam" Margin="0,5,0,5" Background="{x:Null}" BorderBrush="White" Height="32" Click="OpenTeam">
+                        <Grid Width="200">
+                            <TextBlock TextWrapping="Wrap">Керування колективом</TextBlock>
+                        </Grid>
                     </Button>
-                    <Rectangle Height="1" Width="Auto" Fill="White" Margin="5,5,5,5"></Rectangle>
-                    <Button Background="{x:Null}" Height="45" Margin="0,0,0,5" Click="ChangeAccounts">
-                        <TextBlock TextWrapping="Wrap">Налаштування облікового запису</TextBlock>
+                    <Rectangle Height="1" Width="Auto" Fill="#FF444444" Margin="5,0,5,5"></Rectangle>
+                    <Button Background="{x:Null}" Height="32" Margin="0,0,0,5" BorderBrush="White" Click="ChangeAccounts">
+                        <Grid Width="200">
+                            <TextBlock TextWrapping="Wrap">Обліковий запис</TextBlock>
+                        </Grid>
                     </Button>
-                    <Button Height="24" Background="{x:Null}" Margin="0,0,0,5" Click="Button_Click_1">Вихід</Button>
+                    <Rectangle Height="1" Width="Auto" Fill="#FF444444" Margin="0,0,0,5"></Rectangle>
+                    <Button Height="28" BorderBrush="White" Background="{x:Null}" Margin="0,0,0,5" Click="Button_Click_1">
+                        <Grid Width="200">
+                            <TextBlock TextWrapping="Wrap">Вихід</TextBlock>
+                        </Grid>
+                    </Button>
                 </StackPanel>
             </ScrollViewer>
 
@@ -174,7 +203,7 @@
             <Button Height="40" Margin="713,47,299,484" Background="{x:Null}" BorderBrush="{x:Null}" Click="ChangeAccounts">
                 <materialDesign:PackIcon Kind="Close" Foreground="#DD000000" Height="35" Width="35"/>
             </Button>
-            <TextBlock x:Name="_Name" HorizontalAlignment="Left" Margin="314,79,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="65" Width="376" FontFamily="Jura" FontSize="24"/>
+            <TextBlock x:Name="_Name" HorizontalAlignment="Left" Margin="314,79,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="39" Width="376" FontFamily="Jura" FontSize="24"/>
             <TextBlock x:Name="Login" HorizontalAlignment="Left" Margin="312,157,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="25" Width="208" FontSize="18" FontFamily="Jura"/>
             <TextBlock x:Name="Password" HorizontalAlignment="Left" Margin="544,157,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="25" Width="208" FontSize="18" FontFamily="Jura"/>
             <TextBlock HorizontalAlignment="Left" Margin="321,142,0,0" TextWrapping="Wrap" Text="Логін:" VerticalAlignment="Top" FontFamily="Jura"/>
@@ -192,6 +221,7 @@
             <Button x:Name="DeleteAcc" HorizontalAlignment="Left" Margin="731,502,0,0" VerticalAlignment="Top" Width="50" Height="38" Background="{x:Null}" BorderBrush="{x:Null}" Click="deleteAcc">
                 <materialDesign:PackIcon Kind="Trash" Foreground="Black"/>
             </Button>
+            <TextBlock x:Name="Status" HorizontalAlignment="Left" Margin="312,111,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="25" Width="386" FontSize="18" FontFamily="Jura"/>
         </Grid>
         <Grid x:Name="Change_Team" Height="600" Width="1080" Background="DarkRed" Visibility="Hidden" Grid.ColumnSpan="2" Margin="0,0,-6,-29">
             <Button x:Name="Close" HorizontalAlignment="Left" Margin="977,12,0,0" VerticalAlignment="Top" Width="68" Height="62" Background="{x:Null}" BorderBrush="{x:Null}" Click="OpenTeam">

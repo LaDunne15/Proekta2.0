@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Proekta2._0
 {
     class BasketBook
     {
-        List<Book> books = new List<Book>() { };
+        List<Book> books;
         bool promocode = false;
 
         public BasketBook()
         {
-
+            books = new List<Book>() { };
         }
 
         public int getCount()
         {
-            return books.Count-1;
+            return books.Count;
         }
         public void AddBook(Book a)
         {
@@ -50,7 +51,7 @@ namespace Proekta2._0
         }
         public Book getBookAt(int a)
         {
-            return books.ElementAt(a);
+            return books[a-1];
         }
         public List<Book> getlist()
         {
