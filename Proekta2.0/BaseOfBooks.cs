@@ -85,14 +85,21 @@ namespace Proekta2._0
 
         public List<Book> OneTypeBooks(int g)//повертає список книг із визначеним жанром
         {
-            List<Book> A = new List<Book> { };
-            foreach (Book i in l)
+            List<Book> A = new List<Book> { }; 
+            var d = from i in l
+                    orderby i.Count_Selled descending
+                    where i.Genre==g
+                    select i;
+            
+            foreach (Book i in d)
             {
                 if (i.Genre == g)
                 {
                     A.Add(i);
                 }
             }
+
+
             return A;
         }
 

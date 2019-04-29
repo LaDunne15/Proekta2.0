@@ -172,7 +172,8 @@
 
             </Grid>
         </Grid>
-        <Grid x:Name="Reg" Visibility="Hidden" Background="#FF440A0A" Grid.ColumnSpan="2">
+        <Grid x:Name="Reg" Visibility="Visible" Background="#FF440A0A" Grid.ColumnSpan="2">
+            
             <Rectangle Fill="White" Margin="300,25,300,50"></Rectangle>
             <TextBox x:Name="Log" HorizontalAlignment="Left" Height="30" Margin="450,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
             <PasswordBox x:Name="Pass" HorizontalAlignment="Left" Height="30" Margin="450,300,0,0" VerticalAlignment="Top" Width="200" PasswordChar="*"/>
@@ -298,7 +299,7 @@
             </Border>
             <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="145" Margin="29,168,0,0" VerticalAlignment="Top" Width="431"/>
 
-            <Button Content="Очистити поля" Height="Auto" Margin="50,117,336,413" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura"/>
+            <Button Content="Очистити поля" Height="Auto" Margin="50,117,336,413" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura" Click="Button_Click_23"/>
             <TextBlock HorizontalAlignment="Left" Margin="42,44,0,0" TextWrapping="Wrap" Text="- дати знижку всім книгам визначеного автора;" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <Button Content="Дати знижку" Height="Auto" Margin="228,117,102,413" Background="#FFBF5C23" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount1"/>
             <Button HorizontalAlignment="Left" Margin="467,10,0,0" VerticalAlignment="Top" Width="53" Height="50" BorderBrush="White" Background="{x:Null}" Click="Button_Click_9">
@@ -321,7 +322,7 @@
             <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="119" Margin="29,322,0,0" VerticalAlignment="Top" Width="431"/>
             <TextBlock HorizontalAlignment="Left" Margin="42,327,0,0" TextWrapping="Wrap" Text="- знижка по промокоду (10%, діє 2 тижні);" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <Button Content="Дати знижку" Height="Auto" Margin="225,392,105,140" Background="#FFBF5C23" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount3"/>
-            <Button Content="Очистити поля" Height="Auto" Margin="50,268,336,264" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura"/>
+            <Button Content="Очистити поля" Height="Auto" Margin="50,268,336,264" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura" Click="Button_Click_24"/>
             <TextBlock HorizontalAlignment="Left" Margin="42,173,0,0" TextWrapping="Wrap" Text="- дати знижку визначеній книзі;" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <Button Content="Дати знижку" Height="Auto" Margin="228,268,102,264" Background="#FFBF5C23" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount2"/>
             <TextBlock HorizontalAlignment="Left" Margin="71,353,0,0" TextWrapping="Wrap" Text="Промокод:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="93" Height="23"/>

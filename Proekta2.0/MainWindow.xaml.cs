@@ -614,7 +614,8 @@ namespace Proekta2._0
             MessageBox.Show("Знижку "+DisDis1.Text+"% на всі книги "+DisNameA1.Text+" надано!");
             bob.DiscountUpdate(DisNameA1.Text, ((100 - Convert.ToDouble(DisDis1.Text)) / 100));
             data2.ItemsSource = null;
-            data2.ItemsSource = bob.getList();
+            bob = new BaseOfBooks();
+            data2.ItemsSource =bob.getList();
             DisNameA1.Text = "";
             DisDis1.Text = "";
         }
@@ -623,11 +624,13 @@ namespace Proekta2._0
             discount = new Discount(new JustDiscount());
             discount.ExecuteDiscount(DisName2.Text, DisNameA2.Text, (100 - Convert.ToDouble(DisDis2.Text)) / 100);
             MessageBox.Show("Знижку "+DisDis2.Text+"% на книгу"+DisName2.Text+" автора "+DisNameA2.Text+" надано!");
-            bob.DiscountUpdate(DisName2.Text,DisNameA2.Text, ((100 - Convert.ToDouble(DisDis1.Text)) / 100));
+            bob.DiscountUpdate(DisName2.Text,DisNameA2.Text, ((100 - Convert.ToDouble(DisDis2.Text)) / 100));
             data2.ItemsSource = null;
+            bob = new BaseOfBooks();
             data2.ItemsSource = bob.getList();
             DisNameA1.Text = "";
-            DisDis1.Text = "";
+            DisName2.Text = "";
+            DisDis2.Text = "";
         }
         private void discount3(object sender, RoutedEventArgs e)
         {
@@ -646,6 +649,7 @@ namespace Proekta2._0
             discount = new Discount(new RemoveDiscount());
             discount.ExecuteDiscount("", "", 0);
             data2.ItemsSource = null;
+            bob = new BaseOfBooks();
             data2.ItemsSource = bob.getList();
         }
 
@@ -951,6 +955,19 @@ namespace Proekta2._0
                 StackPanel sp= (StackPanel)(((Button)_1.Children[i]).Content);
                 ((Label)(sp.Children[2])).Content = bob.OneTypeBooks(i).Count;
             }
+        }
+
+        private void Button_Click_23(object sender, RoutedEventArgs e)
+        {
+            DisNameA1.Text = "";
+            DisDis1.Text = "";
+        }
+
+        private void Button_Click_24(object sender, RoutedEventArgs e)
+        {
+            DisNameA2.Text = "";
+            DisName2.Text = "";
+            DisDis2.Text = "";
         }
     }
 }
