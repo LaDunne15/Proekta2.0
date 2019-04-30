@@ -154,5 +154,10 @@ namespace Proekta2._0
                 SqlDataReader DD = command.ExecuteReader();
             }
         }
+
+        public void setAdmin(int a)
+        {
+            GetAccountByID(a).isAdmin = true;
+        }
     }
 }

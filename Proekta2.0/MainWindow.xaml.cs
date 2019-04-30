@@ -458,10 +458,10 @@ namespace Proekta2._0
             else
                 Change_Team.Visibility = Visibility.Hidden;
         }
-
+        
         private void datagr_select(object sender, EventArgs e)
         {
-            int index = dataTeam.SelectedIndex;
+            index = dataTeam.SelectedIndex;
         }
         private void Delete_Acc(object sender, EventArgs e)
         {
@@ -968,6 +968,19 @@ namespace Proekta2._0
             DisNameA2.Text = "";
             DisName2.Text = "";
             DisDis2.Text = "";
+        }
+
+        private void Button_Click_25(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        
+        private void TransferAccess(object sender, RoutedEventArgs e)
+        {
+            seller.isAdmin = false;
+            lists.setAdmin(index);
+            MessageBox.Show(lists.GetAccountByID(index).Name+" - новий адміністратор!");
+            MessageBox.Show("Будь ласка, перезайдіть!");
         }
     }
 }

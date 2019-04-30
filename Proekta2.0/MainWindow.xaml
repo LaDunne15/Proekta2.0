@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Proekta2._0"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" Height="600" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
+        mc:Ignorable="d" Height="600" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
     <Window.Resources>
     </Window.Resources>
     <Grid x:Name="main">
@@ -35,10 +35,10 @@
                 <materialDesign:PackIcon Kind="Menu" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Button>
             <Grid Margin="0,0,50,470">
-                <Border BorderBrush="White" BorderThickness="1" Margin="3,2,-3,-11" Background="#7F080808"/>
+                <Border BorderBrush="White" BorderThickness="1" Margin="3,2,-3,5" Background="#7F080808"/>
                 <TextBlock Text="Вас обслуговує"  Margin="8,5,2,53" FontSize="16" FontFamily="Jura" Foreground="White"/>
-                <TextBlock x:Name="seller_name" Text="Якись-то працівник"  Margin="8,26,2,6" FontSize="20" FontFamily="Jura" Foreground="White" TextWrapping="Wrap"/>
-                
+                <TextBlock x:Name="seller_name" Text="Якись-то працівник"  Margin="8,26,2,10" FontSize="20" FontFamily="Jura" Foreground="White" TextWrapping="Wrap"/>
+
             </Grid>
             <ScrollViewer Margin="0,100,0,0" HorizontalScrollBarVisibility="Hidden" Background="#FF343434">
                 <StackPanel Width="220" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="_1" >
@@ -124,8 +124,8 @@
                     <Rectangle Height="1" Width="Auto" Fill="#FF444444" Margin="0,0,0,5"></Rectangle>
                     <Button x:Name="ManageBooks" Background="{x:Null}" BorderBrush="White" Height="32" Click="Ch_Lib">
                         <Grid Width="200">
-                        <TextBlock TextWrapping="Wrap">Керування асортиментом</TextBlock>
-                         </Grid>
+                            <TextBlock TextWrapping="Wrap">Керування асортиментом</TextBlock>
+                        </Grid>
                     </Button>
                     <Button x:Name="MaganeWorkTeam" Margin="0,5,0,5" Background="{x:Null}" BorderBrush="White" Height="32" Click="OpenTeam">
                         <Grid Width="200">
@@ -173,7 +173,7 @@
             </Grid>
         </Grid>
         <Grid x:Name="Reg" Visibility="Visible" Background="#FF440A0A" Grid.ColumnSpan="2">
-            
+
             <Rectangle Fill="White" Margin="300,25,300,50"></Rectangle>
             <TextBox x:Name="Log" HorizontalAlignment="Left" Height="30" Margin="450,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
             <PasswordBox x:Name="Pass" HorizontalAlignment="Left" Height="30" Margin="450,300,0,0" VerticalAlignment="Top" Width="200" PasswordChar="*"/>
@@ -198,6 +198,9 @@
                 <TextBlock HorizontalAlignment="Left" Margin="40,240,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
                 <TextBlock HorizontalAlignment="Left" Margin="42,286,0,0" TextWrapping="Wrap" Text="Ще раз" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
             </Grid>
+            <Button HorizontalAlignment="Left" Margin="19,500,0,0" VerticalAlignment="Top" Width="85" Height="40" Click="Button_Click_25" BorderBrush="Green" BorderThickness="2">
+                <materialDesign:PackIcon Kind="ExitRun" Height="35" Width="35"/>
+            </Button>
         </Grid>
         <Grid x:Name="Change_Acc" Background="#E5000000" Height="600" Width="1080" Visibility="Hidden" Grid.ColumnSpan="2" Margin="0,0,-6,-29">
             <Rectangle Height="500" Width="500" Fill="White"/>
@@ -233,6 +236,9 @@
             <TextBlock HorizontalAlignment="Left" Margin="137,18,0,0" TextWrapping="Wrap" Text="Наші працівники:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="24"/>
             <Button HorizontalAlignment="Left" Margin="27,476,0,0" VerticalAlignment="Top" Width="70" Height="72" Click="Delete_Acc">
                 <materialDesign:PackIcon Kind="Trashcan"/>
+            </Button>
+            <Button HorizontalAlignment="Left" Margin="27,352,0,0" VerticalAlignment="Top" Width="70" Height="72" Click="TransferAccess">
+                <materialDesign:PackIcon Kind="Transfer"/>
             </Button>
         </Grid>
         <Grid Background="Black" x:Name="Change_Library" Visibility="Hidden" Grid.ColumnSpan="2">
