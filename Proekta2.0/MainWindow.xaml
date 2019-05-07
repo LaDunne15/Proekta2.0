@@ -245,7 +245,7 @@
             <Button Margin="998,12,12,495" Height="Auto" Click="Ch_Lib">
                 <materialDesign:PackIcon Kind="Close" Foreground="White" Height="20" Width="20"/>
             </Button>
-            <DataGrid x:Name="data2" HorizontalAlignment="Left" Height="340" Margin="8,8,0,0" VerticalAlignment="Top" Width="980" AutoGenerateColumns="True" FontFamily="Jura" FontSize="10" SelectionChanged="Data2_SelectionChanged"/>
+            <DataGrid x:Name="data2" HorizontalAlignment="Left" Height="340" Margin="8,8,0,0" VerticalAlignment="Top" Width="980" AutoGenerateColumns="True" FontFamily="Jura" FontSize="10" SelectionChanged="Data2_SelectionChanged" IsReadOnly="True"/>
             <TextBlock HorizontalAlignment="Left" Margin="19,356,0,0" TextWrapping="Wrap" Text="Назва книги:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <TextBlock HorizontalAlignment="Left" Margin="70,396,0,0" TextWrapping="Wrap" Text="Автор:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <TextBox x:Name="BookName" HorizontalAlignment="Left" Height="32" Margin="130,352,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="428" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF"/>

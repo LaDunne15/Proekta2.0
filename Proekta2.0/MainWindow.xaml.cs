@@ -28,8 +28,8 @@ namespace Proekta2._0
         BaseOfBooks bob = new BaseOfBooks();
         List<Book> oneGenrebooks;
         List<Book> basket;
-        BasketBook basketBook = new BasketBook();
-        Account seller;
+        BasketBook basketBook = new BasketBook(new BasketWithoutDiscount());
+        Seller seller;
         string _path;
         Discount discount;
         public MainWindow()
@@ -304,7 +304,7 @@ namespace Proekta2._0
                 Reg.Visibility = Visibility.Hidden;
                 Log.Text = "";
                 Pass.Password = "";
-                seller = lists.GetAccountByID(user_index);
+                seller = new Seller(lists.GetAccountByID(user_index));
                 seller_name.Text = seller.Name;
                 if (seller.isAdmin)
                 {
@@ -312,6 +312,7 @@ namespace Proekta2._0
                     DeleteAcc.Visibility = Visibility.Hidden;
                     MaganeWorkTeam.Height = 32;
                     Status.Text = "Адміністратор";
+                    //seller = new Seller(seller);
                 }
                 else
                 {
@@ -320,11 +321,13 @@ namespace Proekta2._0
                     if (seller.count_selled >= 500)
                     {
                         Status.Text = "Продавець із правами адміністратора";
+                      //  seller = new Seller_Plus(seller);
                         ManageBooks.Height = 32;
                     }
                     else
                     {
                         Status.Text = "Звичайний продавець";
+//                        seller = new Admin(seller);
                         ManageBooks.Height = 0;
                     }
                 }
@@ -720,6 +723,7 @@ namespace Proekta2._0
             CB_Genre.Text = GenreFromIndex(CB2_Genre.SelectedIndex+1);
             data2.ItemsSource = null;
             data2.ItemsSource = bob.getList();
+            CountGenres();
         }
 
         private void Button_Click_16(object sender, RoutedEventArgs e)
@@ -857,7 +861,7 @@ namespace Proekta2._0
             if (messageBoxResult2 == MessageBoxResult.Yes)
             {
                 list_b.Children.Clear();
-                basketBook = new BasketBook();
+                basketBook = new BasketBook(new BasketWithoutDiscount());
                 AllPrice.Text = "0₴";
                 PR.Background = (Brush)bc2.ConvertFrom("#FFF44336");
                 PR.BorderBrush = (Brush)bc2.ConvertFrom("#FFF44336");
@@ -938,7 +942,7 @@ namespace Proekta2._0
                 list_b.Children.Clear();
                 bob.SellBooks(basketBook.getlist());
                 lists.Sell(basketBook.getCount(),seller);
-                basketBook = new BasketBook();
+                basketBook = new BasketBook(new BasketWithoutDiscount());
                 AllPrice.Text = "0₴";
 
                 PR.Background = (Brush)bc2.ConvertFrom("#FFF44336");

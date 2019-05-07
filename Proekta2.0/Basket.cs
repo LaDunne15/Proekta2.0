@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Proekta2._0
+namespace Proekta2._08
 {
     class BasketBook
     {
-        List<Book> books;
+        /*List<Book> books;
         bool promocode = false;
 
         public BasketBook()
@@ -58,5 +58,6 @@ namespace Proekta2._0
             return books;
         }
 
+    */
     }
 }
