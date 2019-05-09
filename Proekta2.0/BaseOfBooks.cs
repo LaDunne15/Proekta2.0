@@ -42,13 +42,13 @@ namespace Proekta2._0
                 {
                     while (DD.Read())
                     {
-                        string x1 = DD.GetValue(0).ToString();
-                        string x2 = DD.GetValue(1).ToString();
+                        string x1 = DD.GetValue(0).ToString().Trim();
+                        string x2 = DD.GetValue(1).ToString().Trim();
                         double x3 = Convert.ToDouble(DD.GetValue(2));
-                        string x4 = DD.GetValue(3).ToString();
+                        string x4 = DD.GetValue(3).ToString().Trim();
                         int x5 = Convert.ToInt32(DD.GetValue(4));
                         double x6 = Convert.ToDouble(DD.GetValue(5));
-                        string x7 = DD.GetValue(6).ToString();
+                        string x7 = DD.GetValue(6).ToString().Trim();
                         int x8 = Convert.ToInt32(DD.GetValue(7));
                         l.Add(new Book(x1, x2, x3, x4, x5, x6, x7, x8));
                     }

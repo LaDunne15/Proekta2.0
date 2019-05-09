@@ -32,10 +32,21 @@ namespace Proekta2._0
         Seller seller;
         string _path;
         Discount discount;
+        int activegenre=1;
         public MainWindow()
         {
             InitializeComponent();
             CountGenres();
+            Reload();
+        }
+        void Reload()
+        {
+            books.Children.Clear();
+            oneGenrebooks = bob.OneTypeBooks(activegenre);
+            foreach (var i in oneGenrebooks)
+            {
+                addbooktobass(i);
+            }
         }
 
         bool IsGood(char c)
@@ -74,7 +85,6 @@ namespace Proekta2._0
                 Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
             }
         }
-
         private void Menu(object sender, RoutedEventArgs e)
         {
             if (Menuu.Width == 250)
@@ -155,10 +165,6 @@ namespace Proekta2._0
             buttonAnimation.To = 420;
             buttonAnimation.Duration = TimeSpan.FromSeconds(0.5);
             newAcc.BeginAnimation(Button.HeightProperty, buttonAnimation);
-        }
-        void ff()
-        {
-
         }
         private void addbook(object sender, RoutedEventArgs e)
         {
@@ -333,7 +339,7 @@ namespace Proekta2._0
                 }
             }
             else
-                MessageBox.Show("Не знайдено такого продавця. Перевірте вхідні дані!");
+                MessageBox.Show("Не вірний логін або пароль. Перевірте вхідні дані!");
         }
 
         private void newAccount(object sender, RoutedEventArgs e)
@@ -468,7 +474,7 @@ namespace Proekta2._0
         }
         private void Delete_Acc(object sender, EventArgs e)
         {
-            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити продавця " + lists.GetAccountByID(index).Name.Replace(" ", "") + " під логіном " + lists.GetAccountByID(index).Login.Replace(" ", "") + ", що продав " + lists.GetAccountByID(index).count_selled + " книг", "Видалити аккаунт", MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити продавця " + lists.GetAccountByID(index).Name.Trim() + " під логіном " + lists.GetAccountByID(index).Login.Trim() + ", що продав " + lists.GetAccountByID(index).count_selled + " книг", "Видалити аккаунт", MessageBoxButton.YesNo);
             if (messageBoxResult2 == MessageBoxResult.Yes)
             {
                 if (lists.GetAccountByID(index).Login != seller.Login)
@@ -489,6 +495,7 @@ namespace Proekta2._0
             books.Children.Clear();
             int g = Convert.ToInt32(((Button)sender).Name.Replace("G", ""));
             oneGenrebooks = bob.OneTypeBooks(g);
+            activegenre = g;
             foreach (var i in oneGenrebooks)
             {
                 addbooktobass(i);
@@ -585,19 +592,19 @@ namespace Proekta2._0
             }
             CountGenres();
         }
-
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {
             Book aa = bob.GetBookByID(indexbook);
-            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити книгу '" + aa.Name.Replace(" ","") + "' - " +aa.Author.Replace(" ","")  , "Видалити книгу", MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити книгу '" + aa.Name.Trim() + "' - " +aa.Author.Trim()  , "Видалити книгу", MessageBoxButton.YesNo);
             if (messageBoxResult2 == MessageBoxResult.Yes)
             {
                     bob.DellAcc(aa);
                     MessageBox.Show("Книгу видалено успішно");
                     CountGenres();
-                    lists = new ListAcc();
-                    dataTeam.ItemsSource = null;
-                    dataTeam.ItemsSource = lists.getList();
+                    bob = new BaseOfBooks();
+                    data2.ItemsSource = null;
+                    data2.ItemsSource = bob.getList();
+                Reload();
             }
         }
 
@@ -705,6 +712,7 @@ namespace Proekta2._0
             CB_Name.Text = CB2_Name.Text;
             data2.ItemsSource = null;
             data2.ItemsSource = bob.getList();
+            Reload();
         }
 
         private void Button_Click_14(object sender, RoutedEventArgs e)
@@ -714,6 +722,7 @@ namespace Proekta2._0
             CB_Author.Text = CB2_Author.Text;
             data2.ItemsSource = null;
             data2.ItemsSource = bob.getList();
+            Reload();
         }
 
         private void Button_Click_15(object sender, RoutedEventArgs e)
@@ -724,6 +733,7 @@ namespace Proekta2._0
             data2.ItemsSource = null;
             data2.ItemsSource = bob.getList();
             CountGenres();
+            Reload();
         }
 
         private void Button_Click_16(object sender, RoutedEventArgs e)
@@ -733,6 +743,7 @@ namespace Proekta2._0
             CB_About.Text = CB2_About.Text;
             data2.ItemsSource = null;
             data2.ItemsSource = bob.getList();
+            Reload();
         }
 
         private void Button_Click_17(object sender, RoutedEventArgs e)
@@ -742,6 +753,7 @@ namespace Proekta2._0
             CB_Price.Text = Price.Text;
             data2.ItemsSource = null;
             data2.ItemsSource = bob.getList();
+            Reload();
         }
         string imagepath2;
         private void Button_Click_18(object sender, RoutedEventArgs e)
@@ -781,6 +793,8 @@ namespace Proekta2._0
 
             data2.ItemsSource = null;
             data2.ItemsSource = bob.getList();
+
+            Reload();
         }
 
         private void AddToBasket(Book A)
@@ -983,8 +997,16 @@ namespace Proekta2._0
         {
             seller.isAdmin = false;
             lists.setAdmin(index);
-            MessageBox.Show(lists.GetAccountByID(index).Name+" - новий адміністратор!");
+            MessageBox.Show(lists.GetAccountByID(index).Name.Trim()+" - новий адміністратор!");
             MessageBox.Show("Будь ласка, перезайдіть!");
+            MaganeWorkTeam.Height = 0;
+            if (seller.count_selled<500)
+            { ManageBooks.Height = 0;
+                Status.Text = "Звичайний продавець"; }
+            else
+            {
+                Status.Text = "Продавець із правами адміністратора";
+            }
         }
     }
 }

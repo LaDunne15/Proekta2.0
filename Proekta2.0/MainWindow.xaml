@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Proekta2._0"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" Height="600" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
+        mc:Ignorable="d" Height="600" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="NoResize"
+        Icon="Education_Bookshelf_-512.png" BorderThickness="0,0,0,0" Padding="0">
     <Window.Resources>
     </Window.Resources>
     <Grid x:Name="main">
@@ -17,6 +18,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="back.png" Stretch="UniformToFill"/>
         </Grid.Background>
+        <Rectangle Fill="Black" Grid.ColumnSpan="2" Margin="0,0,0,0" />
         <Grid Height="50" VerticalAlignment="Top" Background="#FF8D4747" Grid.ColumnSpan="2">
             <Button Height="50" Width=" 70" Margin="900,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click">
                 <materialDesign:PackIcon Kind="ShoppingBasket"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
@@ -178,11 +180,11 @@
             <TextBox x:Name="Log" HorizontalAlignment="Left" Height="30" Margin="450,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
             <PasswordBox x:Name="Pass" HorizontalAlignment="Left" Height="30" Margin="450,300,0,0" VerticalAlignment="Top" Width="200" PasswordChar="*"/>
             <Button Content="Увійти" HorizontalAlignment="Left" Margin="464,402,0,0" VerticalAlignment="Top" Width="162" Height="41" Click="Log_in"/>
-            <TextBlock HorizontalAlignment="Left" Margin="415,76,0,0" TextWrapping="Wrap" Text="Bookshelf" VerticalAlignment="Top" Height="86" Width="249" FontSize="48" FontFamily="Jura" FontWeight="Bold"/>
-            <TextBlock HorizontalAlignment="Left" Margin="417,78,0,0" TextWrapping="Wrap" Text="Bookshelf" VerticalAlignment="Top" Height="86" Width="249" FontSize="48" FontFamily="Jura" FontWeight="Bold" Foreground="#7F000000"/>
+            <TextBlock HorizontalAlignment="Left" Margin="411,76,0,0" TextWrapping="Wrap" Text="Bookshelf" VerticalAlignment="Top" Height="86" Width="249" FontSize="48" FontFamily="Jura" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="415,78,0,0" TextWrapping="Wrap" Text="Bookshelf" VerticalAlignment="Top" Height="86" Width="249" FontSize="48" FontFamily="Jura" FontWeight="Bold" Foreground="#7F000000"/>
             <TextBlock HorizontalAlignment="Left" Margin="419,80,0,0" TextWrapping="Wrap" Text="Bookshelf" VerticalAlignment="Top" Height="86" Width="249" FontSize="48" FontFamily="Jura" FontWeight="Bold" Foreground="#3F000000"/>
-            <TextBlock HorizontalAlignment="Left" Margin="421,82,0,0" TextWrapping="Wrap" Text="Bookshelf" VerticalAlignment="Top" Height="86" Width="249" FontSize="48" FontFamily="Jura" FontWeight="Bold" Foreground="#1F000000"/>
-            <TextBlock HorizontalAlignment="Left" Margin="423,84,0,0" TextWrapping="Wrap" Text="Bookshelf" VerticalAlignment="Top" Height="86" Width="249" FontSize="48" FontFamily="Jura" FontWeight="Bold" Foreground="#0F000000"/>
+            <TextBlock HorizontalAlignment="Left" Margin="423,82,0,0" TextWrapping="Wrap" Text="Bookshelf" VerticalAlignment="Top" Height="86" Width="249" FontSize="48" FontFamily="Jura" FontWeight="Bold" Foreground="#1F000000"/>
+            <TextBlock HorizontalAlignment="Left" Margin="427,84,0,0" TextWrapping="Wrap" Text="Bookshelf" VerticalAlignment="Top" Height="86" Width="249" FontSize="48" FontFamily="Jura" FontWeight="Bold" Foreground="#0F000000"/>
             <Button Content="Новий аккаунт" HorizontalAlignment="Left" Margin="464,460,0,0" VerticalAlignment="Top" Width="162" Height="29" Background="#FFF47236" BorderBrush="#FFF47236" Click="Button_Click_4"/>
             <Grid x:Name="newAcc" Background="#FF191919"  Height="0" Width=" 380" VerticalAlignment="Bottom">
                 <Button Height="Auto" Margin="300,11,8,355"  Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click_2">

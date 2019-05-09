@@ -39,7 +39,7 @@ namespace Proekta2._0
                         object x3 = DD.GetValue(2);
                         object x4 = DD.GetValue(3);
                         object x5 = DD.GetValue(4);
-                        l.Add(new Account(Convert.ToString(x1), Convert.ToString(x2), Convert.ToString(x3),Convert.ToInt32(x4),Convert.ToBoolean(x5)));
+                        l.Add(new Account(Convert.ToString(x1).Trim(), Convert.ToString(x2).Trim(), Convert.ToString(x3).Trim(),Convert.ToInt32(x4),Convert.ToBoolean(x5)));
                     }
                 }
             }
@@ -157,7 +157,18 @@ namespace Proekta2._0
 
         public void setAdmin(int a)
         {
+            foreach( var i in l)
+            {
+                i.isAdmin = false;
+            }
             GetAccountByID(a).isAdmin = true;
+            string c = "UPDATE Accounts SET isAdmin = 0 UPDATE Accounts set isAdmin = 1 where Login = '"+GetAccountByID(a).Login+"'";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(c, connection);
+                SqlDataReader DD = command.ExecuteReader();
+            }
         }
     }
 }
