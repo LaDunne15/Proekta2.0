@@ -176,7 +176,7 @@
         </Grid>
         <Grid x:Name="Reg" Visibility="Visible" Background="#FF440A0A" Grid.ColumnSpan="2">
 
-            <Rectangle Fill="White" Margin="300,25,300,50"></Rectangle>
+            <Rectangle Fill="WhiteSmoke" Margin="300,25,300,50"></Rectangle>
             <TextBox x:Name="Log" HorizontalAlignment="Left" Height="30" Margin="450,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TextChanged="TextBox_TextChanged"/>
             <PasswordBox x:Name="Pass" HorizontalAlignment="Left" Height="30" Margin="450,300,0,0" VerticalAlignment="Top" Width="200" PasswordChar="*"/>
             <Button Content="Увійти" HorizontalAlignment="Left" Margin="464,402,0,0" VerticalAlignment="Top" Width="162" Height="41" Click="Log_in"/>
@@ -200,7 +200,7 @@
                 <TextBlock HorizontalAlignment="Left" Margin="40,240,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
                 <TextBlock HorizontalAlignment="Left" Margin="42,286,0,0" TextWrapping="Wrap" Text="Ще раз" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
             </Grid>
-            <Button HorizontalAlignment="Left" Margin="19,500,0,0" VerticalAlignment="Top" Width="85" Height="40" Click="Button_Click_25" BorderBrush="Green" BorderThickness="2">
+            <Button HorizontalAlignment="Left" Margin="19,500,0,0" VerticalAlignment="Top" Width="85" Height="40" Click="Button_Click_25" BorderBrush="WhiteSmoke" BorderThickness="2">
                 <materialDesign:PackIcon Kind="ExitRun" Height="35" Width="35"/>
             </Button>
         </Grid>
@@ -267,7 +267,7 @@
                 <ComboBoxItem Content="Фантастика і фентезі"></ComboBoxItem>
                 <ComboBoxItem Content="Художня література"></ComboBoxItem>
             </ComboBox>
-            <TextBox x:Name="BookPrice" HorizontalAlignment="Left" Height="47" Margin="390,503,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" BorderBrush="#89FFFFFF" Foreground="White" FontSize="36" FontFamily="Jura"/>
+            <TextBox x:Name="BookPrice" HorizontalAlignment="Left" Height="47" Margin="390,503,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" BorderBrush="#89FFFFFF" Foreground="White" FontSize="36" FontFamily="Jura" PreviewTextInput="AnyTextBox_PreviewTextInput" />
             <TextBlock HorizontalAlignment="Left" Margin="326,436,0,0" TextWrapping="Wrap" Text="Жанр:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <TextBlock HorizontalAlignment="Left" Margin="404,476,0,0" TextWrapping="Wrap" Text="Ціна:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <Button Content="Завантажити фото" HorizontalAlignment="Left" Margin="594,358,0,0" VerticalAlignment="Top" Width="155" Click="Button_Click_5"/>
@@ -313,7 +313,7 @@
             <Button HorizontalAlignment="Left" Margin="467,10,0,0" VerticalAlignment="Top" Width="53" Height="50" BorderBrush="White" Background="{x:Null}" Click="Button_Click_9">
                 <materialDesign:PackIcon Kind="Close"/>
             </Button>
-            <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="145" Margin="29,168,0,0" VerticalAlignment="Top" Width="431"/>
+            <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="145" Margin="29,168,0,0" VerticalAlignment="Top" Width="431" PreviewTextInput="AnyTextBox_PreviewTextInput"/>
             <Button Content="Очистити поля" Height="Auto" Margin="50,268,336,264" Background="#FF96C356" BorderBrush="#FF96C356" FontFamily="Jura"/>
             <TextBlock HorizontalAlignment="Left" Margin="42,173,0,0" TextWrapping="Wrap" Text="- дати знижку визначеній книзі;" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <TextBlock HorizontalAlignment="Left" Margin="46,201,0,0" TextWrapping="Wrap" Text="Назва:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="98" Height="22"/>
@@ -326,7 +326,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="46,78,0,0" TextWrapping="Wrap" Text="Ім'я автора:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="98" Height="22"/>
             <TextBox x:Name="DisNameA1" HorizontalAlignment="Left" Height="30" Margin="141,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF"/>
             <TextBlock HorizontalAlignment="Left" Margin="354,60,0,0" TextWrapping="Wrap" Text="Знижка:" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16" Width="98" Height="22"/>
-            <TextBox x:Name="DisDis1" HorizontalAlignment="Left" Height="30" Margin="343,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="94" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF"/>
+            <TextBox x:Name="DisDis1" HorizontalAlignment="Left" Height="30" Margin="343,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="94" FontFamily="Jura" Foreground="White" FontSize="16" BorderBrush="#89FFFFFF" PreviewTextInput="AnyTextBox_PreviewTextInput"/>
             <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="119" Margin="29,322,0,0" VerticalAlignment="Top" Width="431"/>
             <TextBlock HorizontalAlignment="Left" Margin="42,327,0,0" TextWrapping="Wrap" Text="- знижка по промокоду (10%, діє 2 тижні);" VerticalAlignment="Top" Foreground="White" FontFamily="Jura" FontSize="16"/>
             <Button Content="Дати знижку" Height="Auto" Margin="225,392,105,140" Background="#FFBF5C23" BorderBrush="#FFBF5C23" FontFamily="Jura" Click="discount3"/>

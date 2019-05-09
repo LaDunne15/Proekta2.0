@@ -1008,5 +1008,14 @@ namespace Proekta2._0
                 Status.Text = "Продавець із правами адміністратора";
             }
         }
+        private void AnyTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".")
+               && (!((TextBox)sender).Text.Contains(".")
+               && ((TextBox)sender).Text.Length != 0)))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
