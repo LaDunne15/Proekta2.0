@@ -38,6 +38,7 @@ namespace Proekta2._0
             InitializeComponent();
             CountGenres();
             Reload();
+            ConcreteGenre.Text = GenreFromIndex(activegenre);
         }
         void Reload()
         {
@@ -434,7 +435,7 @@ namespace Proekta2._0
                 {
                     if (x3 == 1)
                     {
-                        lists.DellAcc(seller);
+                        lists.DelAcc(seller);
                         MessageBox.Show("Перевірка пройдена! Аккаунт видалено! Удачі тобі в цьому житті!");
                         Change_Acc.Visibility = Visibility.Hidden;
                         Reg.Visibility = Visibility.Visible;
@@ -479,7 +480,7 @@ namespace Proekta2._0
             {
                 if (lists.GetAccountByID(index).Login != seller.Login)
                 {
-                    lists.DellAcc(lists.GetAccountByID(index));
+                    lists.DelAcc(lists.GetAccountByID(index));
                     MessageBox.Show("Продавця видалено успішно");
                     lists = new ListAcc();
                     dataTeam.ItemsSource = null;
@@ -494,6 +495,7 @@ namespace Proekta2._0
         {
             books.Children.Clear();
             int g = Convert.ToInt32(((Button)sender).Name.Replace("G", ""));
+            ConcreteGenre.Text = GenreFromIndex(g);
             oneGenrebooks = bob.OneTypeBooks(g);
             activegenre = g;
             foreach (var i in oneGenrebooks)
@@ -508,6 +510,8 @@ namespace Proekta2._0
                 buttonAnimation.Duration = TimeSpan.FromSeconds(0.2);
                 Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
             }
+            SeartchBox.Text = "";
+            S.Visibility = Visibility.Hidden;
         }
 
         private void ManageBook(object sender, RoutedEventArgs e)
@@ -598,7 +602,7 @@ namespace Proekta2._0
             MessageBoxResult messageBoxResult2 = MessageBox.Show("Ви дійсно хочете видалити книгу '" + aa.Name.Trim() + "' - " +aa.Author.Trim()  , "Видалити книгу", MessageBoxButton.YesNo);
             if (messageBoxResult2 == MessageBoxResult.Yes)
             {
-                    bob.DellAcc(aa);
+                    bob.DelBook(aa);
                     MessageBox.Show("Книгу видалено успішно");
                     CountGenres();
                     bob = new BaseOfBooks();
@@ -1015,6 +1019,66 @@ namespace Proekta2._0
                && ((TextBox)sender).Text.Length != 0)))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void ClearSearch(object sender, RoutedEventArgs e)
+        {
+            SeartchBox.Text="";
+            S.Visibility = Visibility.Hidden;
+            books.Children.Clear();
+            oneGenrebooks = bob.OneTypeBooks(activegenre);
+            foreach (var i in oneGenrebooks)
+            {
+                addbooktobass(i);
+            }
+        }
+
+        private void SeartchBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            S.Visibility = Visibility.Visible;
+            books.Children.Clear();
+            if (activegenre == -1)
+            {
+                ConcreteGenre.Text = "Всі книги";
+                oneGenrebooks = bob.getList();
+            }
+            else
+            {
+                ConcreteGenre.Text = GenreFromIndex(activegenre);
+                oneGenrebooks = bob.OneTypeBooks(activegenre);
+            }
+            string c = SeartchBox.Text.ToLower();
+            List<Book> h1 = (from u in oneGenrebooks
+                     where u.Name.ToLower().Contains(c) || u.Author.ToLower().Contains(c)
+                     select u).ToList();
+            foreach (var i in h1)
+            {
+                addbooktobass(i);
+            }
+            oneGenrebooks = h1;
+            if (SeartchBox.Text == "")
+                S.Visibility = Visibility.Hidden;
+        }
+        private void Gi(object sender, RoutedEventArgs e)
+        {
+            SeartchBox.Text = "";
+            ConcreteGenre.Text = "Всі книги";
+            S.Visibility = Visibility.Hidden;
+            books.Children.Clear();
+            activegenre = -1;
+            oneGenrebooks = bob.getList();
+            foreach (var i in oneGenrebooks)
+            {
+                addbooktobass(i);
+            }
+            if (Menuu.Width == 250)
+            {
+                DoubleAnimation buttonAnimation = new DoubleAnimation();
+                buttonAnimation.From = 250;
+                buttonAnimation.To = 0;
+                buttonAnimation.Duration = TimeSpan.FromSeconds(0.5);
+                Menuu.BeginAnimation(Button.WidthProperty, buttonAnimation);
             }
         }
     }

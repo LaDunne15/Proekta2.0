@@ -19,7 +19,6 @@ namespace Proekta2._0
         {
             State.setPromocode(this);
         }
-
         public double getSumm()
         {
             double s = 0;

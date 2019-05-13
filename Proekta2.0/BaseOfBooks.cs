@@ -16,19 +16,6 @@ namespace Proekta2._0
             foreach (Book i in f)
                 l.Add(i);
         }
-        public List<Book> getList()
-        {
-            var d= from i in l
-            orderby i.Count_Selled descending
-            select i;
-
-            List<Book> ddd = new List<Book>() { };
-            foreach (var i in d)
-            {
-                ddd.Add(i);
-            }
-            return ddd;
-        }
         public BaseOfBooks()
         {
             string c = "SELECT * FROM Books order by Books.Count_Selled desc";
@@ -55,12 +42,24 @@ namespace Proekta2._0
                 }
             }
         }
+        public List<Book> getList()
+        {
+            var d = from i in l
+                    orderby i.Count_Selled descending
+                    select i;
+
+            List<Book> ddd = new List<Book>() { };
+            foreach (var i in d)
+            {
+                ddd.Add(i);
+            }
+            return ddd;
+        }
         public Book GetBookByID(int a)
         {
             return l.ElementAt(a);
         }
-
-        public void DellAcc(Book A)
+        public void DelBook(Book A)
         {
             string c = "DELETE  FROM Books WHERE Name='" + A.Name + "' AND AuthorName ='" + A.Author + "'";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -82,7 +81,6 @@ namespace Proekta2._0
                 SqlDataReader DD = command.ExecuteReader();
             }
         }
-
         public List<Book> OneTypeBooks(int g)//повертає список книг із визначеним жанром
         {
             List<Book> A = new List<Book> { }; 
@@ -102,7 +100,6 @@ namespace Proekta2._0
 
             return A;
         }
-
         public void DiscountUpdate(string A,string B,double C)
         {
             foreach(var i in l)
@@ -130,7 +127,6 @@ namespace Proekta2._0
                     i.discount = 1;
             }
         }
-
         public void CHName(string A, string B,string C)
         {
             foreach (Book i in l)
@@ -165,7 +161,6 @@ namespace Proekta2._0
                 SqlDataReader DD = command.ExecuteReader();
             }
         }
-
         public void CHGenre(string A, string B, int C)
         {
             foreach (Book i in l)
@@ -257,7 +252,6 @@ namespace Proekta2._0
                     }
                 }
             }
-
         }
     }
 }

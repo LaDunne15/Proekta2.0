@@ -77,7 +77,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AccDec.cs" />
-    <Compile Include="Basket.cs" />
     <Compile Include="Promocodedb.cs" />
     <Compile Include="Seller.cs" />
     <Compile Include="StBasket.cs" />

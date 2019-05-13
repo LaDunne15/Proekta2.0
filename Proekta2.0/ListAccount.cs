@@ -17,10 +17,6 @@ namespace Proekta2._0
             foreach (Account i in f)
                 l.Add(i);
         }
-        public List<Account> getList()
-        {
-            return l;
-        }
         public ListAcc()
         {
             string c = "SELECT * FROM Accounts";
@@ -43,6 +39,10 @@ namespace Proekta2._0
                     }
                 }
             }
+        }
+        public List<Account> getList()
+        {
+            return l;
         }
         public int SearchAcc(string A, string B)//перевіряє, чи знайдений такий акаунт, якзо не знайдений, то повертвє -1
         {
@@ -91,7 +91,6 @@ namespace Proekta2._0
                 SqlDataReader DD = command.ExecuteReader();
             }
         }
-
         public void CHLogin(string A, string B)
         {
             foreach (Account i in l)
@@ -107,8 +106,7 @@ namespace Proekta2._0
                 SqlDataReader DD = command.ExecuteReader();
             }
         }
-
-        public void DellAcc(Account A)
+        public void DelAcc(Account A)
         {
             string c = "DELETE  FROM Accounts WHERE Name='"+A.Name+"' AND Login='"+A.Login+"' AND Password='"+A.password+"'";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -119,7 +117,6 @@ namespace Proekta2._0
             }
             l.Remove(A);
         }
-
         public void AddAccount(Account a)
         {
             l.Add(a);
@@ -131,7 +128,6 @@ namespace Proekta2._0
                 SqlDataReader DD = command.ExecuteReader();
             }
         }
-
         public void Sell(int a,Account b)
         {
             foreach (Account i in l)
@@ -154,7 +150,6 @@ namespace Proekta2._0
                 SqlDataReader DD = command.ExecuteReader();
             }
         }
-
         public void setAdmin(int a)
         {
             foreach( var i in l)

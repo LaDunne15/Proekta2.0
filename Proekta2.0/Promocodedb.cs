@@ -9,7 +9,6 @@ namespace Proekta2._0
 {
     class Promocodedb
     {
-
         string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Proekta_2;Integrated Security=True";
         public List<string> list = new List<string>() { };
         public Promocodedb()
