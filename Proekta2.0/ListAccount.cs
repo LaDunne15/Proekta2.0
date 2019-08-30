@@ -83,7 +83,7 @@ namespace Proekta2._0
                 if (i.password.Replace(" ", "") == A)
                     i.ChangePass(B);
             }
-            string c = "UPDATE Accounts SET Password="+B+" WHERE Name='"+A+"'";
+            string c = "UPDATE Accounts SET Password='"+B+"' WHERE Name='"+A+"'";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -98,7 +98,7 @@ namespace Proekta2._0
                 if (i.Login.Replace(" ", "") == A)
                     i.ChangeLogin(B);
             }
-            string c = "UPDATE Accounts SET Login=" + B + " WHERE Name='" + A + "'";
+            string c = "UPDATE Accounts SET Login='" + B + "' WHERE Name='" + A + "'";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
